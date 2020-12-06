@@ -41,9 +41,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BusinessObjects\Attempt.cs" />
     <Compile Include="BusinessObjects\Client.cs" />
     <Compile Include="BusinessObjects\ClientCollection.cs" />
+    <Compile Include="BusinessObjects\LearningCard.cs" />
+    <Compile Include="BusinessObjects\LearningCardCollection.cs" />
+    <Compile Include="BusinessObjects\Manager.cs" />
+    <Compile Include="BusinessObjects\Theme.cs" />
+    <Compile Include="BusinessObjects\ThemeCollection.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

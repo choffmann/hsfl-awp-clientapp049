@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace De.HsFlensburg.ClientApp049.Business.Model.BusinessObjects
+namespace De.HsFlensburg.ClientApp049.Business.Model
 {
-    class Test
+    class ClaasClass
     {
     }
 }
