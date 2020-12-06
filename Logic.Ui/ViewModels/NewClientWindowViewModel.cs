@@ -22,10 +22,10 @@ namespace De.HsFlensburg.ClientApp049.Logic.Ui.ViewModels
 
         private void AddClientMethod()
         {
-            ClientViewModel clientVM = new ClientViewModel();
-            clientVM.Id = Identifier;
-            clientVM.Name = Name;
-            MyVMCollection.Add(clientVM);
+            ClientViewModel cvm = new ClientViewModel();
+            cvm.Id = Identifier;
+            cvm.Name = Name;
+            MyVMCollection.Add(cvm);
         }
     }
 }
