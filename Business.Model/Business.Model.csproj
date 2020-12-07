@@ -47,7 +47,6 @@
     <Compile Include="BusinessObjects\LearningCard.cs" />
     <Compile Include="BusinessObjects\LearningCardCollection.cs" />
     <Compile Include="BusinessObjects\Manager.cs" />
-    <Compile Include="BusinessObjects\Test.cs" />
     <Compile Include="BusinessObjects\Theme.cs" />
     <Compile Include="BusinessObjects\ThemeCollection.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
