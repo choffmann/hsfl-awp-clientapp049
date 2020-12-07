@@ -6,7 +6,11 @@ using System.Threading.Tasks;
 
 namespace De.HsFlensburg.ClientApp049.Business.Model.BusinessObjects
 {
-    class Manager
+    public class Manager
     {
+        public LearningCardCollection learningCards { get; set; }
+
+        public ThemeCollection themes { get; set; }
+
     }
 }
