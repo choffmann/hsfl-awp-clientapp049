@@ -13,9 +13,9 @@ namespace De.HsFlensburg.ClientApp049.Logic.Ui
         public ClientCollectionViewModel MyVMCollection { get; set; }
         public ViewModelLocator()
         {
-            MyVMCollection = new ClientCollectionViewModel();
+            MyVMCollection = new ClientCollectionViewModel(); // Hier den Manager-Viewmodel erzeugen
 
-            MainWindowVM = new MainWindowViewModel(MyVMCollection);
+            MainWindowVM = new MainWindowViewModel(MyVMCollection); // Hier jedem window-wiev-model das model als manager-view-model übergeben
             NewClientWindowVM = new NewClientWindowViewModel(MyVMCollection);
         }
 
