@@ -4,10 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace De.HsFlensburg.ClientApp049.Logic.Ui.ViewModels
+namespace De.HsFlensburg.ClientApp049.Logic.Ui.Wrapper
 {
-    public class StatisticsWindowViewModel
+    public class CardCollectionViewModel
     {
-
     }
 }

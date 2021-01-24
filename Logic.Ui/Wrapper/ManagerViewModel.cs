@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace De.HsFlensburg.ClientApp049.Logic.Ui.Wrapper
 {
-    class ManagerViewModel
+    public class ManagerViewModel
     {
     }
 }

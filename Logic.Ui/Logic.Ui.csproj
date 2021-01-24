@@ -46,12 +46,15 @@
     <Compile Include="ViewModelLocator.cs" />
     <Compile Include="ViewModels\Chart\ChartOverview.cs" />
     <Compile Include="ViewModels\Chart\ChartStatistics.cs" />
+    <Compile Include="ViewModels\NewLearningCardWindowViewModel.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
     <Compile Include="ViewModels\NewClientWindowViewModel.cs" />
     <Compile Include="ViewModels\StatisticsWindowViewModel.cs" />
     <Compile Include="Wrapper\AbstractViewModels\IViewModel.cs" />
     <Compile Include="Wrapper\AbstractViewModels\ViewModelBase.cs" />
     <Compile Include="Wrapper\AbstractViewModels\ViewModelSyncCollections.cs" />
+    <Compile Include="Wrapper\CardCollectionViewModel.cs" />
+    <Compile Include="Wrapper\CardViewModel.cs" />
     <Compile Include="Wrapper\ClientCollectionViewModel.cs" />
     <Compile Include="Wrapper\ClientViewModel.cs" />
     <Compile Include="Wrapper\ManagerViewModel.cs" />

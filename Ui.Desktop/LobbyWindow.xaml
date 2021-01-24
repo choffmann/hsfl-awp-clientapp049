@@ -13,9 +13,9 @@
             <ColumnDefinition/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <Button Content="Karten anlegen" Grid.Column="0" HorizontalAlignment="Center"  VerticalAlignment="Center" Width="150" Height="150"/>
+        <Button Content="Karten anlegen" Grid.Column="0" HorizontalAlignment="Center"  VerticalAlignment="Center" Width="150" Height="150" Click="OpenCreateWindow"/>
         <Button Content="Lernen" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Width="150" Height="150" Click="OpenLearnWindow"/>
-        <Button Content="Statistik" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center" Width="150" Height="150"/>
+        <Button Content="Statistik" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center" Width="150" Height="150" Click="OpenStatsWindow"/>
         <Button Content="Laden/Speichern" Grid.Column="3" HorizontalAlignment="Center" VerticalAlignment="Center" Width="150" Height="150" Click="OpenSaveWindow" />
     </Grid>
 </Window>
