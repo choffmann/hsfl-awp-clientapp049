@@ -8,12 +8,12 @@
         Title="SaveWindow" Height="450" Width="800">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="95*"/>
-            <ColumnDefinition Width="169*"/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
         </Grid.ColumnDefinitions>
 
-        <Button Content="Export" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="80,110,0,109" Width="200" Height="200"/>
-        <Button Content="Import" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,110,80,109" Width="200" Height="200" Grid.Column="1"/>
-        <Label Content="Export/Import" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="90"/>
+        <Button Content="Export" HorizontalAlignment="Center" VerticalAlignment="Center" Width="200" Height="200"/>
+        <Button Content="Import" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Width="200" Height="200"/>
+        <Label Content="Export/Import" HorizontalAlignment="Left" VerticalAlignment="Top" Width="100" Margin="10"/>
     </Grid>
 </Window>

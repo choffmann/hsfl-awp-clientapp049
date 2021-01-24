@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:De.HsFlensburg.ClientApp049.Ui.Desktop"
              xmlns:viewModels="clr-namespace:De.HsFlensburg.ClientApp049.Logic.Ui;assembly=Logic.Ui"
-             StartupUri="MainWindow.xaml">
+             StartupUri="LobbyWindow.xaml">
     <Application.Resources>
         <viewModels:ViewModelLocator x:Key="ViewModelLocator"></viewModels:ViewModelLocator>
     </Application.Resources>

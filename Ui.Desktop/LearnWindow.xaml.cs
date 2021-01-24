@@ -23,5 +23,10 @@ namespace De.HsFlensburg.ClientApp049.Ui.Desktop
         {
             InitializeComponent();
         }
+
+        private void CloseWindow(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
     }
 }
