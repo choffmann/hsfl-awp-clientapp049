@@ -1,6 +1,4 @@
-﻿
-using De.HsFlensburg.ClientApp049.Logic.Ui.Wrapper;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,25 +10,23 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace De.HsFlensburg.ClientApp049.Ui.Desktop
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for LearnWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class LearnWindow : Window
     {
-        public MainWindow()
+        public LearnWindow()
         {
             InitializeComponent();
         }
 
-        private void OpenNewWindow(object sender, RoutedEventArgs e)
+        private void CloseWindow(object sender, RoutedEventArgs e)
         {
-            SaveWindow myWindow = new SaveWindow();
-            myWindow.ShowDialog();
+            this.Close();
         }
     }
 }
