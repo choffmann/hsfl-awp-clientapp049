@@ -29,7 +29,8 @@ namespace De.HsFlensburg.ClientApp049.Ui.Desktop
         // Karten erstellen
         private void OpenCreateWindow(object sender, RoutedEventArgs e)
         {
-
+            NewLearningCardWindow newLearningCardWindow = new NewLearningCardWindow();
+            newLearningCardWindow.ShowDialog();
         }
 
         // Karten Lernen
@@ -42,7 +43,8 @@ namespace De.HsFlensburg.ClientApp049.Ui.Desktop
         // Statistik
         private void OpenStatsWindow(object sender, RoutedEventArgs e)
         {
-
+            StatisticsWindow statistics = new StatisticsWindow();
+            statistics.ShowDialog();
         }
 
         // Import / Export

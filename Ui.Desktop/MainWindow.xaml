@@ -17,7 +17,7 @@
             <RowDefinition></RowDefinition>
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
-        <Button Grid.Row="0" Click="OpenNewLearningCardWindow">Lernkarten anlegen</Button>
-        <Button Grid.Row="1" Click="OpenStatisticsWindow">Statistik zeigen</Button>
+        <Button Grid.Row="0">Lernkarten anlegen</Button>
+        <Button Grid.Row="1">Statistik zeigen</Button>
     </Grid>
 </Window>
