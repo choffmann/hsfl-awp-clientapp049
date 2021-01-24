@@ -1,0 +1,24 @@
+﻿<Window x:Class="De.HsFlensburg.ClientApp049.Ui.Desktop.LearnWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:De.HsFlensburg.ClientApp049.Ui.Desktop"
+        mc:Ignorable="d"
+        Title="LearnWindow" Height="450" Width="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="60"/>
+            <RowDefinition Height="170"/>
+            <RowDefinition Height="190"/>
+        </Grid.RowDefinitions>
+        <Button Content="Home" Grid.Row="0" HorizontalAlignment="Left" Margin="10" VerticalAlignment="Center" Width="50" Height="30" Click="CloseWindow"/>
+        <ComboBox Grid.Row="0" HorizontalAlignment="Left" Margin="65,15,0,15" VerticalAlignment="Center" Width="150" Height="30"/>
+        <Label Content="Richtig: 0 Falsch: 0" HorizontalAlignment="Left" Margin="660,10,0,0" VerticalAlignment="Center" Width="120" Height="30"/>
+        
+        <Label Content="Frage:" Grid.Row="1"/>
+        
+        <TextBox Text="Antwort:" Grid.Row="2"/>
+        <Button Content="Überprüfen" HorizontalAlignment="Right" Margin="10" Grid.Row="2" VerticalAlignment="Bottom" Width="75" Height="20"/>
+    </Grid>
+</Window>
