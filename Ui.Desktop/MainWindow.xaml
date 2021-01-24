@@ -13,11 +13,11 @@
         <Binding Source="{StaticResource ViewModelLocator}" Path="MainWindowVM"></Binding>
     </Window.DataContext>
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition></ColumnDefinition>
-            <ColumnDefinition></ColumnDefinition>
-        </Grid.ColumnDefinitions>
-        <Button Grid.Column="0" Click="OpenNewWindow">Open New Client Window</Button>
-        <DataGrid Grid.Column="1" ItemsSource="{Binding Path=MyVMCollection}"></DataGrid>
+        <Grid.RowDefinitions>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <Button Grid.Row="0" Click="OpenNewLearningCardWindow">Lernkarten anlegen</Button>
+        <Button Grid.Row="1" Click="OpenStatisticsWindow">Statistik zeigen</Button>
     </Grid>
 </Window>

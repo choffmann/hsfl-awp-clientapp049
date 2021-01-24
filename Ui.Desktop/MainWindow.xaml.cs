@@ -27,10 +27,16 @@ namespace De.HsFlensburg.ClientApp049.Ui.Desktop
             InitializeComponent();
         }
 
-        private void OpenNewWindow(object sender, RoutedEventArgs e)
+        private void OpenNewLearningCardWindow(object sender, RoutedEventArgs e)
         {
-            NewClientWindow myWindow = new NewClientWindow();
-            myWindow.ShowDialog();
+            NewLearningCardWindow newLearningCardWindow = new NewLearningCardWindow();
+            newLearningCardWindow.ShowDialog();
+        }
+
+        private void OpenStatisticsWindow(object sender, RoutedEventArgs e)
+        {
+            StatisticsWindow statWindow = new StatisticsWindow();
+            statWindow.ShowDialog();
         }
     }
 }
