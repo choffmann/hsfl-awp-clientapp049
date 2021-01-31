@@ -13,24 +13,30 @@ namespace De.HsFlensburg.ClientApp049.Logic.Ui.ViewModels
         public String Question { get; set; }
         public String Answer { get; set; }
 
-        public Manager MyManager { get; set; }
+        public ManagerViewModel MyManager { get; set; }
 
-        public RelayCommand AddCard { get; }
+        public RelayCommand GetCard { get; }
 
 
-        public NewLearningCardWindowViewModel(Manager manager)
+        public NewLearningCardWindowViewModel(ManagerViewModel manager)
         {
-            AddCard = new RelayCommand(() => AddCardMethod());
+            GetCard = new RelayCommand(() => AddCardMethod());
             MyManager = manager;
             //TODO Theme relay command
         }
 
         private void AddCardMethod()
         {
-            CardViewModel cvm = new CardViewModel();
-            cvm.Answer = Answer;
-            cvm.Question = Question;
-            MyManager.learningCards.Add(cvm);
+            // Demo Karte erstellen und anzeigen
+
+            LearningCard MyCard = new LearningCard();
+            MyCard.Question= "Was ist 1 + 1?";
+            MyCard.Answer = "2";
+
+            //CardViewModel cvm = new CardViewModel();
+            //cvm.Answer = Answer;
+            //cvm.Question = Question;
+            //MyManager.learningCards.Add(cvm)
         }
 
     }

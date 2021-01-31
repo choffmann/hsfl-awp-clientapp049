@@ -12,7 +12,6 @@ namespace De.HsFlensburg.ClientApp049.Logic.Ui
     {
         public ManagerViewModel MyManager { get; set; }   
         public NewLearningCardWindowViewModel LeaningCardWVM { get; }
-
         public StatisticsWindowViewModel StatisticsWVM { get; }
         public NewClientWindowViewModel WindowVM { get; }
         public ViewModelLocator()
@@ -26,10 +25,8 @@ namespace De.HsFlensburg.ClientApp049.Logic.Ui
             MyManager = new ManagerViewModel();
             LeaningCardWVM = new NewLearningCardWindowViewModel(MyManager);
 
-            NewClientWindowVM = new
+            //NewClientWindowVM = new
 
         }
-
-     
     }
 }
