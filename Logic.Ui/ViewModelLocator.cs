@@ -24,9 +24,9 @@ namespace De.HsFlensburg.ClientApp049.Logic.Ui
 
             //TODO models erzeugen (für beispieldaten)
             MyManager = new ManagerViewModel();
-            //LeaningCardWVM = new NewLearningCardWindowViewModel(MyManager);
+            LeaningCardWVM = new NewLearningCardWindowViewModel(MyManager);
 
-            //NewClientWindowVM = new 
+            NewClientWindowVM = new
 
         }
 

@@ -27,10 +27,10 @@ namespace De.HsFlensburg.ClientApp049.Logic.Ui.ViewModels
 
         private void AddCardMethod()
         {
-            //CardViewModel cvm = new CardViewModel();
-            //cvm.Answer = Answer;
-            //cvm.Question = Question;
-            //MyManager.learningCards.Add(cvm);
+            CardViewModel cvm = new CardViewModel();
+            cvm.Answer = Answer;
+            cvm.Question = Question;
+            MyManager.learningCards.Add(cvm);
         }
 
     }
