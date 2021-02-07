@@ -27,9 +27,9 @@ namespace De.HsFlensburg.ClientApp049.Logic.Ui
 
             //jedem windowwievmodel das model als managerviewmodel übergeben
             LeaningCardWVM = new LearningCardWindowViewModel(MyManager);
-            NewLeaningCardWVM = new NewLearningCardWindowViewModel(MyManager);
-            // TODO: StatisticsWVM = new StatisticsWindowViewModel(MyManager);
             LearningWVM = new LearningWindowViewModel(MyManager);
+            //NewLeaningCardWVM = new NewLearningCardWindowViewModel(MyManager);
+            // TODO: StatisticsWVM = new StatisticsWindowViewModel(MyManager);
         }
     }
 }

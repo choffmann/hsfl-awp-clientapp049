@@ -28,7 +28,7 @@ namespace De.HsFlensburg.ClientApp049.Logic.Ui.ViewModels
         private void GetCardMethod()
         {
             // Hier Beispielcarte Erstellen
-
+            Console.WriteLine(" Cick!!! LearningCardWindowViewModel");
 
         }
     }
