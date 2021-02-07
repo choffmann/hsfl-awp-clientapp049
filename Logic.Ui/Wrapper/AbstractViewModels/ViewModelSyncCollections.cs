@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace De.HsFlensburg.ClientApp999.Logic.Ui.Wrapper.AbstractViewModels
+namespace De.HsFlensburg.ClientApp049.Logic.Ui.Wrapper.AbstractViewModels
 {
     public abstract class ViewModelSyncCollection
         <TypeViewModel, TypeModel, TypeModelCollection> :

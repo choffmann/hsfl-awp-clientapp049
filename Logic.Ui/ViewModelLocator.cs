@@ -10,11 +10,10 @@ namespace De.HsFlensburg.ClientApp049.Logic.Ui
 {
     public class ViewModelLocator
     {
-        public ManagerViewModel MyManager { get; set; }   
-        public NewLearningCardWindowViewModel LeaningCardWVM { get; }
+        public CardCollectionViewModel CardCollectionVM { get; set; }   
+        public NewLearningCardWindowViewModel NewLeaningCardWindowVM { get; }
 
         public StatisticsWindowViewModel StatisticsWVM { get; }
-        public NewClientWindowViewModel WindowVM { get; }
         public ViewModelLocator()
         {
             //OLD
@@ -23,13 +22,8 @@ namespace De.HsFlensburg.ClientApp049.Logic.Ui
             //NewClientWindowVM = new NewClientWindowViewModel(MyVMCollection);
 
             //TODO models erzeugen (für beispieldaten)
-            MyManager = new ManagerViewModel();
-            LeaningCardWVM = new NewLearningCardWindowViewModel(MyManager);
-
-            NewClientWindowVM = new
-
+            CardCollectionVM = new CardCollectionViewModel();
+            NewLeaningCardWindowVM = new NewLearningCardWindowViewModel(CardCollectionVM);
         }
-
-     
     }
 }

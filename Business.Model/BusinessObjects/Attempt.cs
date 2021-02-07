@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace De.HsFlensburg.ClientApp049.Business.Model.BusinessObjects
 {
+    [Serializable]
     public class Attempt
     {
         public DateTime AttemptDate { get; set; }

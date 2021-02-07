@@ -1,37 +1,91 @@
-﻿using De.HsFlensburg.ClientApp049.Business.Model.BusinessObjects;
+﻿using BinarySerializer;
+using De.HsFlensburg.ClientApp049.Business.Model.BusinessObjects;
 using De.HsFlensburg.ClientApp049.Logic.Ui.Wrapper;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace De.HsFlensburg.ClientApp049.Logic.Ui.ViewModels
 {
-    public class NewLearningCardWindowViewModel
+    public class NewLearningCardWindowViewModel: INotifyPropertyChanged
     {
-        public String Question { get; set; }
-        public String Answer { get; set; }
 
-        public Manager MyManager { get; set; }
+        private String question;
+        private String awnser;
 
-        public RelayCommand AddCard { get; }
-
-
-        public NewLearningCardWindowViewModel(Manager manager)
+        public String Question
         {
-            AddCard = new RelayCommand(() => AddCardMethod());
-            MyManager = manager;
-            //TODO Theme relay command
+            get
+            {
+                return question;
+            }
+            set
+            {
+                question = value;
+                OnPropertyChanged("Question");
+            }
+        }
+        public String Awnser
+        {
+            get
+            {
+                return awnser;
+            }
+            set
+            {
+                awnser = value;
+                OnPropertyChanged("Awnser");
+            }
         }
 
-        private void AddCardMethod()
+        private ManagerViewModel manger;
+        public ManagerViewModel ManagerObject;
+        public CardCollectionViewModel CardCollectionVM { get; set; }
+        public RelayCommand AddLearningCard { get; }
+        public RelayCommand SerializeToBin { get; }
+        public RelayCommand DeserializeFromBin { get; }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        public NewLearningCardWindowViewModel(CardCollectionViewModel model)
+        {
+            SerializeToBin = new RelayCommand(() => SerializeToBinMethode());
+            DeserializeFromBin = new RelayCommand(() => DesrializeFromBinMethode());
+            AddLearningCard = new RelayCommand(() => AddLearningCardMethode());
+            CardCollectionVM = model;
+        }
+
+        private void SerializeToBinMethode()
+        {
+            BinarySerializerFileHandler.Save(CardCollectionVM.Model);
+        }
+
+        private void DesrializeFromBinMethode()
+        {
+            LearningCardCollection model = BinarySerializerFileHandler.Load();
+            CardCollectionVM.Clear();
+            foreach(var element in model)
+            {
+                //CardCollectionVM.Add(new CardViewModel(element));
+            }
+        }
+
+        private void AddLearningCardMethode()
         {
             CardViewModel cvm = new CardViewModel();
-            cvm.Answer = Answer;
             cvm.Question = Question;
-            MyManager.learningCards.Add(cvm);
+            cvm.Answer = Awnser;
+            CardCollectionVM.Add(cvm);
         }
 
+        protected void OnPropertyChanged(string propertyName)
+        {
+            if(PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+            }
+        }
     }
 }

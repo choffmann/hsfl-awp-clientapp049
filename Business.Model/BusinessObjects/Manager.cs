@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace De.HsFlensburg.ClientApp049.Business.Model.BusinessObjects
 {
+    [Serializable]
     public class Manager
     {
         public LearningCardCollection learningCards { get; set; }
