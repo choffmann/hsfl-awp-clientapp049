@@ -25,6 +25,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Services.MessageBus", "Serv
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ui.Desktop", "Ui.Desktop\Ui.Desktop.csproj", "{6362C4F6-D1E8-4DF6-94FD-D28808D82DF9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BinarySerializer", "BinarySerializer\BinarySerializer.csproj", "{A0CF8861-B8AA-49CF-9CDF-17958193B031}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -47,6 +49,10 @@ Global
 		{6362C4F6-D1E8-4DF6-94FD-D28808D82DF9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6362C4F6-D1E8-4DF6-94FD-D28808D82DF9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6362C4F6-D1E8-4DF6-94FD-D28808D82DF9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A0CF8861-B8AA-49CF-9CDF-17958193B031}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A0CF8861-B8AA-49CF-9CDF-17958193B031}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A0CF8861-B8AA-49CF-9CDF-17958193B031}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A0CF8861-B8AA-49CF-9CDF-17958193B031}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -56,6 +62,7 @@ Global
 		{FBF44CEC-D65D-429F-917C-C530693C110C} = {E517F344-CBB2-4846-9BA6-C3847E27DF28}
 		{222B093D-3501-4713-BF84-1DBFEA047917} = {65B682E1-CA25-4235-B0A3-BD2F673481B2}
 		{6362C4F6-D1E8-4DF6-94FD-D28808D82DF9} = {D03CBD20-378D-4864-9286-DE4D6333CDFB}
+		{A0CF8861-B8AA-49CF-9CDF-17958193B031} = {65B682E1-CA25-4235-B0A3-BD2F673481B2}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {9873FED4-3077-45EA-BDE4-48CC6BFCB564}

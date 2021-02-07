@@ -1,36 +1,43 @@
 ﻿using De.HsFlensburg.ClientApp049.Business.Model.BusinessObjects;
+using De.HsFlensburg.ClientApp049.Logic.Ui.Wrapper.AbstractViewModels;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace De.HsFlensburg.ClientApp049.Logic.Ui.Wrapper
 {
-    public class CardViewModel
+    public class CardViewModel: ViewModelBase<LearningCard>
     {
-        public LearningCard myCard = new LearningCard();
 
-        public CardViewModel(LearningCard card)
+        public CardViewModel(): base()
         {
-            this.myCard = card;
         }
 
-        public CardViewModel()
+        public ObservableCollection<Attempt> CardAttempts
         {
-
+            get
+            {
+                return Model.CardAttempts;
+            }
+            set
+            {
+                Model.CardAttempts = value;
+            }
         }
 
         public String Question
         {
             get
             {
-                return myCard.Question;
+                return Model.Question;
             }
 
             set
             {
-                myCard.Question = value;
+                Model.Question = value;
             }
         }
 
@@ -38,15 +45,30 @@ namespace De.HsFlensburg.ClientApp049.Logic.Ui.Wrapper
         {
             get
             {
-                return myCard.Answer;
+                return Model.Answer;
             }
 
             set
             {
-                myCard.Answer = value;
+                Model.Answer = value;
             }
         }
 
+        public int Box
+        {
+            get
+            {
+                return Model.Box;
+            }
+            set
+            {
+                Model.Box = value;
+            }
+        }
 
+        public override void NewModelAssigned()
+        {
+            
+        }
     }
 }

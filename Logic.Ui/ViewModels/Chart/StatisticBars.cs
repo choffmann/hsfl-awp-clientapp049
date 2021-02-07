@@ -6,11 +6,13 @@ using System.Threading.Tasks;
 
 namespace De.HsFlensburg.ClientApp049.Logic.Ui.ViewModels.Chart
 {
-    class ChartOverview
+    public class StatisticBars
     {
-        public ChartOverview()
+        //public StatisticBarCollection BarCollection { get; set; }
+        public StatisticBars(object data)
         {
-
+            //BarCollection = new StatisticBarCollection();
+            
         }
     }
 }

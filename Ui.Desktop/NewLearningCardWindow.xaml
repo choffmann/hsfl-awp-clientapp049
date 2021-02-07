@@ -4,8 +4,12 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:De.HsFlensburg.ClientApp049.Ui.Desktop"
+        xmlns:viewModels="clr-namespace:De.HsFlensburg.ClientApp049.Logic.Ui.ViewModels;assembly=Logic.Ui"
         mc:Ignorable="d"
         Title="Lernkarte anlegen" Height="768" Width="1024">
+    <Window.DataContext>
+        <Binding Source="{StaticResource ViewModelLocator}" Path="NewLeaningCardWindowVM"></Binding>
+    </Window.DataContext>
     <Grid>
         <Grid.ColumnDefinitions>
             <!--Left-->
@@ -25,10 +29,10 @@
         </Grid.RowDefinitions>
         <TextBlock Grid.Row="0" Grid.Column="0" Text="Frage" Margin="51,62,60,0"></TextBlock>
         <TextBlock Grid.Row="0" Grid.Column="1" Text="Antwort" Margin="60,62,51,0"/>
-        <TextBox Grid.Row="1" Grid.Column="0" Margin="51,0,60,0"></TextBox>
-        <TextBox Grid.Row="1" Grid.Column="1" Margin="60,0,51,0"></TextBox>
+        <TextBox Grid.Row="1" Grid.Column="0" Margin="51,0,60,0" Text="{Binding Path=Question}"></TextBox>
+        <TextBox Grid.Row="1" Grid.Column="1" Margin="60,0,51,0" Text="{Binding Path=Awnser}"></TextBox>
         <ComboBox Grid.Row="2" Grid.Column="0" Margin="51,10,60,12"></ComboBox>
         <Button Grid.Row="3" Grid.Column="0" Margin="51,126,298,10">Back</Button>
-        <Button Grid.Row="3" Grid.Column="1" Margin="298,126,51,10">Save</Button>
+        <Button Grid.Row="3" Grid.Column="1" Margin="298,126,51,10" Command="{Binding AddLearningCard, Mode=OneWay}">Save</Button>
     </Grid>
 </Window>
