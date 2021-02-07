@@ -13,7 +13,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="60"/>
             <RowDefinition Height="170"/>
-            <RowDefinition Height="190"/>
+            <RowDefinition Height="180"/>
         </Grid.RowDefinitions>
         <Button Content="Home" Grid.Row="0" HorizontalAlignment="Left" Margin="10" VerticalAlignment="Center" Width="50" Height="30" Click="CloseWindow"/>
         <ComboBox Grid.Row="0" HorizontalAlignment="Left" Margin="65,15,0,15" VerticalAlignment="Center" Width="150" Height="30"/>
@@ -22,6 +22,6 @@
         <Label Content="Frage:" Grid.Row="1"/>
         
         <TextBox Text="Antwort:" Grid.Row="2"/>
-        <Button Command="{Binding GetCard, Mode=OneWay}" Content="Überprüfen" HorizontalAlignment="Right" Margin="10" Grid.Row="2" VerticalAlignment="Bottom" Width="75" Height="20"/>
+        <Button Command="{Binding GetCard}" Content="Überprüfen" HorizontalAlignment="Right" Margin="10" Grid.Row="2" VerticalAlignment="Bottom" Width="75" Height="20"/>
     </Grid>
 </Window>

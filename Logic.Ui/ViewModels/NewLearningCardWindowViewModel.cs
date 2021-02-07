@@ -12,7 +12,6 @@ namespace De.HsFlensburg.ClientApp049.Logic.Ui.ViewModels
     {
         public String Question { get; set; }
         public String Answer { get; set; }
-
         public ManagerViewModel MyManager { get; set; }
 
         public RelayCommand GetCard { get; }

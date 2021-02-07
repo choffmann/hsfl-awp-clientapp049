@@ -27,7 +27,7 @@ namespace De.HsFlensburg.ClientApp999.Logic.Ui.Wrapper.AbstractViewModels
                 }
                 catch (Exception e)
                 {
-
+                    Console.WriteLine(e);
                 }
 
             }

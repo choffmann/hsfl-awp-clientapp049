@@ -46,6 +46,8 @@
     <Compile Include="ViewModelLocator.cs" />
     <Compile Include="ViewModels\Chart\ChartOverview.cs" />
     <Compile Include="ViewModels\Chart\ChartStatistics.cs" />
+    <Compile Include="ViewModels\LearningCardWindowViewModel.cs" />
+    <Compile Include="ViewModels\LearningWindowViewModel.cs" />
     <Compile Include="ViewModels\NewLearningCardWindowViewModel.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
     <Compile Include="ViewModels\NewClientWindowViewModel.cs" />
