@@ -37,6 +37,7 @@ namespace De.HsFlensburg.ClientApp049.Logic.Ui.Wrapper
             if(this.LearningCards != null)
             {
                 this.LearningCards.Model = this.Model?.learningCards;
+                // Hier könnte ihre Werbung stehen
             }
         }
     }
