@@ -12,9 +12,21 @@ namespace De.HsFlensburg.ClientApp049.Logic.Ui.ViewModels
 {
     public class NewLearningCardWindowViewModel: INotifyPropertyChanged
     {
-
         private String question;
         private String awnser;
+        public ManagerViewModel manager;
+        public ManagerViewModel ManagerObject
+        {
+            get
+            {
+                return manager;
+            }
+            set
+            {
+                manager = value;
+                OnPropertyChanged("ManagerObject");
+            }
+        }
 
         public String Question
         {
@@ -41,9 +53,9 @@ namespace De.HsFlensburg.ClientApp049.Logic.Ui.ViewModels
             }
         }
 
-        private ManagerViewModel manger;
-        public ManagerViewModel ManagerObject;
+       
         public CardCollectionViewModel CardCollectionVM { get; set; }
+        public ThemeCollectionViewModel ThemeCollectionVM { get; set; }
         public RelayCommand AddLearningCard { get; }
         public RelayCommand SerializeToBin { get; }
         public RelayCommand DeserializeFromBin { get; }
@@ -51,25 +63,36 @@ namespace De.HsFlensburg.ClientApp049.Logic.Ui.ViewModels
         public event PropertyChangedEventHandler PropertyChanged;
         public NewLearningCardWindowViewModel(ManagerViewModel model)
         {
-            SerializeToBin = new RelayCommand(() => SerializeToBinMethode());
-            DeserializeFromBin = new RelayCommand(() => DesrializeFromBinMethode());
+            ManagerObject = model;
             AddLearningCard = new RelayCommand(() => AddLearningCardMethode());
-            Mana = model;
+            DeserializeFromBin = new RelayCommand(() => DeserializeFromBinMethode());
+            DeserializeFromBinMethode();
+            //AddTheme();
+        }
+
+        private void AddTheme()
+        {
+            ThemeViewModel themeVM;
+            String[] theme = { "Mathe", "Deutsch", "Englisch" };
+            for (int i = 0; i < theme.Length; i++)
+            {
+                themeVM = new ThemeViewModel();
+                themeVM.Name = theme[i];
+                ManagerObject.Themes.Add(themeVM);
+            }
         }
 
         private void SerializeToBinMethode()
         {
-            BinarySerializerFileHandler.Save(CardCollectionVM.Model);
+            Console.WriteLine("Speichere...");
+            BinarySerializerFileHandler.Save(ManagerObject.Model);
         }
 
-        private void DesrializeFromBinMethode()
+        private void DeserializeFromBinMethode()
         {
-            LearningCardCollection model = BinarySerializerFileHandler.Load();
-            CardCollectionVM.Clear();
-            foreach(var element in model)
-            {
-                //CardCollectionVM.Add(new CardViewModel(element));
-            }
+            Console.WriteLine("Lade...");
+            ManagerObject = new ManagerViewModel();
+            ManagerObject.Model = BinarySerializerFileHandler.Load();
         }
 
         private void AddLearningCardMethode()
@@ -77,8 +100,10 @@ namespace De.HsFlensburg.ClientApp049.Logic.Ui.ViewModels
             CardViewModel cvm = new CardViewModel();
             cvm.Question = Question;
             cvm.Answer = Awnser;
-            CardCollectionVM.Add(cvm);
-            ManagerObject.LearningCards = cvm;
+            cvm.Box = 0;
+            cvm.CardAttempts = null;
+            ManagerObject.LearningCards.Add(cvm);
+            SerializeToBinMethode();
         }
 
         protected void OnPropertyChanged(string propertyName)

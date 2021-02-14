@@ -18,6 +18,7 @@ namespace De.HsFlensburg.ClientApp049.Logic.Ui
         //Window
         public StatisticsWindowViewModel StatisticsWVM { get; }
         public LearningWindowViewModel LearningWVM { get; }
+        public LobbyWindowsViewModel LobbyWindowVM { get; }
 
 
         public ViewModelLocator()
@@ -28,11 +29,9 @@ namespace De.HsFlensburg.ClientApp049.Logic.Ui
             //jedem windowwievmodel das model als managerviewmodel übergeben
             LeaningCardWVM = new LearningCardWindowViewModel(MyManager);
             LearningWVM = new LearningWindowViewModel(MyManager);
-            //NewLeaningCardWVM = new NewLearningCardWindowViewModel(MyManager);
+            NewLeaningCardWVM = new NewLearningCardWindowViewModel(MyManager);
+            LobbyWindowVM = new LobbyWindowsViewModel(MyManager);
             // TODO: StatisticsWVM = new StatisticsWindowViewModel(MyManager);
-
-
-            //Hier wurde ganz ganz viel geändert
         }
     }
 }

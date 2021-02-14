@@ -23,36 +23,5 @@ namespace De.HsFlensburg.ClientApp049.Ui.Desktop
         {
             InitializeComponent();
         }
-
-        // UIs
-
-        // Karten erstellen
-        private void OpenCreateWindow(object sender, RoutedEventArgs e)
-        {
-            NewLearningCardWindow newLearningCardWindow = new NewLearningCardWindow();
-            newLearningCardWindow.ShowDialog();
-        }
-
-        // Karten Lernen
-        private void OpenLearnWindow(object sender, RoutedEventArgs e)
-        {
-            LearnWindow learnWindow = new LearnWindow();
-            learnWindow.ShowDialog();
-        }
-
-        // Statistik
-        private void OpenStatsWindow(object sender, RoutedEventArgs e)
-        {
-            StatisticsWindow statistics = new StatisticsWindow();
-            statistics.ShowDialog();
-        }
-
-        // Import / Export
-        private void OpenSaveWindow(object sender, RoutedEventArgs e)
-        {
-            SaveWindow saveWindow = new SaveWindow();
-            saveWindow.ShowDialog();
-        }
-
     }
 }

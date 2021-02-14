@@ -8,25 +8,14 @@ using System.Threading.Tasks;
 
 namespace De.HsFlensburg.ClientApp049.Logic.Ui.Wrapper
 {
-    public class ThemeViewModel : ViewModelBase<Theme>
+    public class ThemeCollectionViewModel : ViewModelSyncCollection<ThemeViewModel, Theme, ThemeCollection>
     {
-        public ThemeViewModel() :base()
+        public ThemeCollectionViewModel() :base()
         {
-        }
-        public String Name
-        {
-            get
-            {
-                return Model.Name;
-            }
-
-            set
-            {
-                Model.Name = value;
-            }
         }
         public override void NewModelAssigned()
         {
+
         }
     }
 }
