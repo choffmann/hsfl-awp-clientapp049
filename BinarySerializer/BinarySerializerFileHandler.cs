@@ -12,19 +12,20 @@ namespace BinarySerializer
 {
     public class BinarySerializerFileHandler
     {
-        public static void Save(LearningCardCollection model)
+        public const String filePath = @"C:\Users\hoffmann\Documents\FH Flensburg\AWP\serialisierung\LearningCards.bin";
+        public static void Save(Manager model)
         {
             IFormatter formatter = new BinaryFormatter();
-            Stream stream = new FileStream(@"C:\temp\LearningCards.bin", FileMode.Create, FileAccess.Write, FileShare.None);
+            Stream stream = new FileStream(filePath, FileMode.Create, FileAccess.Write, FileShare.None);
             formatter.Serialize(stream, model);
             stream.Close();
         }
 
-        public static LearningCardCollection Load()
+        public static Manager Load()
         {
             IFormatter formatter = new BinaryFormatter();
-            Stream stream = new FileStream(@"C:\temp\LearningCards.bin", FileMode.Open, FileAccess.Read, FileShare.Read);
-            LearningCardCollection model = (LearningCardCollection)formatter.Deserialize(stream);
+            Stream stream = new FileStream(filePath, FileMode.Open, FileAccess.Read, FileShare.Read);
+            Manager model = (Manager)formatter.Deserialize(stream);
             stream.Close();
             return model;
         }

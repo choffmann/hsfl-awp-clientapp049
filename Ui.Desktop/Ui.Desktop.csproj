@@ -58,6 +58,7 @@
     <Compile Include="LobbyWindow.xaml.cs">
       <DependentUpon>LobbyWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="MessageBusLogic\MessageListener.cs" />
     <Compile Include="NewLearningCardWindow.xaml.cs">
       <DependentUpon>NewLearningCardWindow.xaml</DependentUpon>
     </Compile>
@@ -126,6 +127,10 @@
     <ProjectReference Include="..\Logic.Ui\Logic.Ui.csproj">
       <Project>{fbf44cec-d65d-429f-917c-c530693c110c}</Project>
       <Name>Logic.Ui</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Services.MessageBus\Services.MessageBus.csproj">
+      <Project>{222B093D-3501-4713-BF84-1DBFEA047917}</Project>
+      <Name>Services.MessageBus</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

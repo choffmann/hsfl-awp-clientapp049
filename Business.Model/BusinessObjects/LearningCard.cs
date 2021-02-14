@@ -12,10 +12,8 @@ namespace De.HsFlensburg.ClientApp049.Business.Model.BusinessObjects
     {
         public ObservableCollection<Attempt> CardAttempts { get; set; }
         public String Question { get; set; }
-
         public String Answer { get; set; }
-
         public int Box { get; set; }
-
+        public String Theme {get; set;}
     }
 }

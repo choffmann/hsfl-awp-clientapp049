@@ -4,6 +4,7 @@ using De.HsFlensburg.ClientApp049.Logic.Ui.Wrapper;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,9 +13,22 @@ namespace De.HsFlensburg.ClientApp049.Logic.Ui.ViewModels
 {
     public class NewLearningCardWindowViewModel: INotifyPropertyChanged
     {
-
         private String question;
         private String awnser;
+        private ThemeViewModel theme;
+        public ManagerViewModel manager;
+        public ManagerViewModel ManagerObject
+        {
+            get
+            {
+                return manager;
+            }
+            set
+            {
+                manager = value;
+                OnPropertyChanged("ManagerObject");
+            }
+        }
 
         public String Question
         {
@@ -40,10 +54,18 @@ namespace De.HsFlensburg.ClientApp049.Logic.Ui.ViewModels
                 OnPropertyChanged("Awnser");
             }
         }
-
-        private ManagerViewModel manger;
-        public ManagerViewModel ManagerObject;
-        public CardCollectionViewModel CardCollectionVM { get; set; }
+        public ThemeViewModel Theme {
+            get
+            {
+                return theme;
+            }
+            set
+            {
+                theme = value;
+                OnPropertyChanged("Theme");
+            }
+        }
+        public ThemeCollectionViewModel ThemeCollectionVM { get; set; }
         public RelayCommand AddLearningCard { get; }
         public RelayCommand SerializeToBin { get; }
         public RelayCommand DeserializeFromBin { get; }
@@ -51,24 +73,25 @@ namespace De.HsFlensburg.ClientApp049.Logic.Ui.ViewModels
         public event PropertyChangedEventHandler PropertyChanged;
         public NewLearningCardWindowViewModel(ManagerViewModel model)
         {
-            SerializeToBin = new RelayCommand(() => SerializeToBinMethode());
-            DeserializeFromBin = new RelayCommand(() => DesrializeFromBinMethode());
+            ManagerObject = model;
             AddLearningCard = new RelayCommand(() => AddLearningCardMethode());
-            //Mana = model;
+            DeserializeFromBin = new RelayCommand(() => DeserializeFromBinMethode());
+            DeserializeFromBinMethode();
         }
 
         private void SerializeToBinMethode()
         {
-            BinarySerializerFileHandler.Save(CardCollectionVM.Model);
+            Console.WriteLine("Speichere...");
+            BinarySerializerFileHandler.Save(ManagerObject.Model);
         }
 
-        private void DesrializeFromBinMethode()
+        private void DeserializeFromBinMethode()
         {
-            LearningCardCollection model = BinarySerializerFileHandler.Load();
-            CardCollectionVM.Clear();
-            foreach(var element in model)
+            if(File.Exists(BinarySerializerFileHandler.filePath))
             {
-                //CardCollectionVM.Add(new CardViewModel(element));
+                Console.WriteLine("Lade...");
+                ManagerObject = new ManagerViewModel();
+                ManagerObject.Model = BinarySerializerFileHandler.Load();
             }
         }
 
@@ -77,8 +100,13 @@ namespace De.HsFlensburg.ClientApp049.Logic.Ui.ViewModels
             CardViewModel cvm = new CardViewModel();
             cvm.Question = Question;
             cvm.Answer = Awnser;
-            CardCollectionVM.Add(cvm);
-            //ManagerObject.LearningCards = cvm;
+            cvm.Theme = Theme.Name;
+            
+            ManagerObject.LearningCards.Add(cvm);
+            SerializeToBinMethode();
+
+            Question = "";
+            Awnser = "";
         }
 
         protected void OnPropertyChanged(string propertyName)
