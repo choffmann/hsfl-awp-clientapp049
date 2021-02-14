@@ -12,7 +12,7 @@ namespace BinarySerializer
 {
     public class BinarySerializerFileHandler
     {
-        public const String filePath = @"C:\Users\hoffmann\Documents\FH Flensburg\AWP\serialisierung\LearningCards.bin";
+        public const String filePath = @"C:\Users\Nico\Desktop\Studium\AWP\Speicher\LearningCards.bin";
         public static void Save(Manager model)
         {
             IFormatter formatter = new BinaryFormatter();
