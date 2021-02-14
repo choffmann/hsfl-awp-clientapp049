@@ -54,7 +54,7 @@ namespace De.HsFlensburg.ClientApp049.Logic.Ui.ViewModels
             SerializeToBin = new RelayCommand(() => SerializeToBinMethode());
             DeserializeFromBin = new RelayCommand(() => DesrializeFromBinMethode());
             AddLearningCard = new RelayCommand(() => AddLearningCardMethode());
-            Mana = model;
+            //Mana = model;
         }
 
         private void SerializeToBinMethode()
@@ -78,7 +78,7 @@ namespace De.HsFlensburg.ClientApp049.Logic.Ui.ViewModels
             cvm.Question = Question;
             cvm.Answer = Awnser;
             CardCollectionVM.Add(cvm);
-            ManagerObject.LearningCards = cvm;
+            //ManagerObject.LearningCards = cvm;
         }
 
         protected void OnPropertyChanged(string propertyName)
