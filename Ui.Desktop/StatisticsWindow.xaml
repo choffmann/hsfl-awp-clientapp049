@@ -6,6 +6,9 @@
         xmlns:local="clr-namespace:De.HsFlensburg.ClientApp049.Ui.Desktop"
         mc:Ignorable="d"
         Title="Statistik" Height="768" Width="1024">
+    <Window.DataContext>
+        <Binding Source="{StaticResource ViewModelLocator}" Path="StatisticsWVM"></Binding>
+    </Window.DataContext>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="211*"></ColumnDefinition>
@@ -35,7 +38,25 @@
 
         <Button Grid.Row="1" Grid.Column="0" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="20,0,0,10" Padding="40,10" Width="133">Back</Button>
         <Button Grid.Row="1" Grid.Column="0" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="20,0,0,60" Padding="40,10" Click="Button_Click">Draw Test</Button>
-        <Canvas Grid.Column="1" HorizontalAlignment="Left" Height="596" Grid.Row="1" VerticalAlignment="Top" Width="805" Name="canvas"/>
-
+        <Canvas Grid.Column="1" HorizontalAlignment="Left" Height="596" Grid.Row="1" VerticalAlignment="Top" Width="805" Name="canvas">
+            <ItemsControl ItemsSource="{Binding StatisticBars}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <Canvas></Canvas>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemContainerStyle>
+                    <Style TargetType="ContentPresenter">
+                        <Setter Property="Canvas.Left" Value="{Binding X}"></Setter>
+                        <Setter Property="Canvas.Top" Value="{Binding Y}"></Setter>
+                    </Style>
+                </ItemsControl.ItemContainerStyle>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Rectangle Width="{Binding Width}" Height="{Binding Height}" Fill="{Binding Color}"></Rectangle>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </Canvas>
     </Grid>
 </Window>

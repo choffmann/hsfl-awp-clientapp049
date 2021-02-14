@@ -26,7 +26,7 @@ namespace De.HsFlensburg.ClientApp049.Ui.Desktop
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            int success = 5;
+            /*int success = 5;
             int failed = 5;
 
             int WIDTH = 805;
@@ -72,7 +72,7 @@ namespace De.HsFlensburg.ClientApp049.Ui.Desktop
                 failedLine.Y2 = 50;
                 failedLine.StrokeThickness = 50;
                 canvas.Children.Add(failedLine);
-            }
+            }*/
         }
     }
 }

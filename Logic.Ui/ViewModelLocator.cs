@@ -31,7 +31,7 @@ namespace De.HsFlensburg.ClientApp049.Logic.Ui
             LearningWVM = new LearningWindowViewModel(MyManager);
             NewLeaningCardWVM = new NewLearningCardWindowViewModel(MyManager);
             LobbyWindowVM = new LobbyWindowsViewModel(MyManager);
-            // TODO: StatisticsWVM = new StatisticsWindowViewModel(MyManager);
+            StatisticsWVM = new StatisticsWindowViewModel(MyManager);
         }
     }
 }

@@ -65,6 +65,17 @@ namespace De.HsFlensburg.ClientApp049.Logic.Ui.Wrapper
                 Model.Box = value;
             }
         }
+        public String Theme
+        {
+            get
+            {
+                return Model.Theme;
+            }
+            set
+            {
+                Model.Theme = value;
+            }
+        }
 
         public override void NewModelAssigned()
         {

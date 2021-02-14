@@ -4,6 +4,7 @@ using De.HsFlensburg.ClientApp049.Logic.Ui.Wrapper;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,6 +15,7 @@ namespace De.HsFlensburg.ClientApp049.Logic.Ui.ViewModels
     {
         private String question;
         private String awnser;
+        private ThemeViewModel theme;
         public ManagerViewModel manager;
         public ManagerViewModel ManagerObject
         {
@@ -52,9 +54,17 @@ namespace De.HsFlensburg.ClientApp049.Logic.Ui.ViewModels
                 OnPropertyChanged("Awnser");
             }
         }
-
-       
-        public CardCollectionViewModel CardCollectionVM { get; set; }
+        public ThemeViewModel Theme {
+            get
+            {
+                return theme;
+            }
+            set
+            {
+                theme = value;
+                OnPropertyChanged("Theme");
+            }
+        }
         public ThemeCollectionViewModel ThemeCollectionVM { get; set; }
         public RelayCommand AddLearningCard { get; }
         public RelayCommand SerializeToBin { get; }
@@ -67,19 +77,6 @@ namespace De.HsFlensburg.ClientApp049.Logic.Ui.ViewModels
             AddLearningCard = new RelayCommand(() => AddLearningCardMethode());
             DeserializeFromBin = new RelayCommand(() => DeserializeFromBinMethode());
             DeserializeFromBinMethode();
-            //AddTheme();
-        }
-
-        private void AddTheme()
-        {
-            ThemeViewModel themeVM;
-            String[] theme = { "Mathe", "Deutsch", "Englisch" };
-            for (int i = 0; i < theme.Length; i++)
-            {
-                themeVM = new ThemeViewModel();
-                themeVM.Name = theme[i];
-                ManagerObject.Themes.Add(themeVM);
-            }
         }
 
         private void SerializeToBinMethode()
@@ -90,9 +87,12 @@ namespace De.HsFlensburg.ClientApp049.Logic.Ui.ViewModels
 
         private void DeserializeFromBinMethode()
         {
-            Console.WriteLine("Lade...");
-            ManagerObject = new ManagerViewModel();
-            ManagerObject.Model = BinarySerializerFileHandler.Load();
+            if(File.Exists(BinarySerializerFileHandler.filePath))
+            {
+                Console.WriteLine("Lade...");
+                ManagerObject = new ManagerViewModel();
+                ManagerObject.Model = BinarySerializerFileHandler.Load();
+            }
         }
 
         private void AddLearningCardMethode()
@@ -100,10 +100,13 @@ namespace De.HsFlensburg.ClientApp049.Logic.Ui.ViewModels
             CardViewModel cvm = new CardViewModel();
             cvm.Question = Question;
             cvm.Answer = Awnser;
-            cvm.Box = 0;
-            cvm.CardAttempts = null;
+            cvm.Theme = Theme.Name;
+            
             ManagerObject.LearningCards.Add(cvm);
             SerializeToBinMethode();
+
+            Question = "";
+            Awnser = "";
         }
 
         protected void OnPropertyChanged(string propertyName)
