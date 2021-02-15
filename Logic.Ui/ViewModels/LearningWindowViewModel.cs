@@ -1,7 +1,10 @@
-﻿using De.HsFlensburg.ClientApp049.Business.Model.BusinessObjects;
+﻿using BinarySerializer;
+using De.HsFlensburg.ClientApp049.Business.Model.BusinessObjects;
 using De.HsFlensburg.ClientApp049.Logic.Ui.Wrapper;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
+using System.IO;
 
 namespace De.HsFlensburg.ClientApp049.Logic.Ui.ViewModels
 {
@@ -10,51 +13,67 @@ namespace De.HsFlensburg.ClientApp049.Logic.Ui.ViewModels
         public RelayCommand CheckAnswer { get; }
         public RelayCommand NextCard { get; }
         public event PropertyChangedEventHandler PropertyChanged;
-        public ManagerViewModel MyManager;
-        private LearningCard learningCard;
+        public ManagerViewModel manager;
+        private IEnumerator<CardViewModel> cardCollection;
+        private CardViewModel currentCard;
+        private ThemeViewModel theme;
         private String answer;
         private String bgColor;
 
 
-        public ManagerViewModel ManagerVM
+
+        public ManagerViewModel Manager
         {
             get
             {
-                return MyManager;
+                return manager;
             }
 
             set
             {
-                MyManager = value;
-                OnPropertyChanged("ManagerVM");
+                manager = value;
+                OnPropertyChanged("Manager");
             }
         }
 
-
-
-
-        private LearningCard LearningCard
+        private IEnumerator<CardViewModel> CardCollection
         {
             get
             {
-                return this.learningCard;
+                return this.cardCollection;
             }
             set
             {
-                this.learningCard = value;
-                OnPropertyChanged("LearningCard");
-                OnPropertyChanged("Question");
+                this.cardCollection = value;
+                OnPropertyChanged("CardCollection");
             }
         }
 
-        public String Question
+        public CardViewModel CurrentCard
         {
             get
             {
-                return this.learningCard.Question;
+                return this.currentCard;
+            }
+            set
+            {
+                this.currentCard = value;
+                OnPropertyChanged("CurrentCard");
             }
         }
 
+        public ThemeViewModel Theme
+        {
+            get
+            {
+                return this.theme;
+            }
+            set
+            {
+                this.theme = value;
+                OnPropertyChanged("Theme");
+            }
+        }
         public String Answer
         {
             get
@@ -96,40 +115,57 @@ namespace De.HsFlensburg.ClientApp049.Logic.Ui.ViewModels
         public LearningWindowViewModel() { }
         public LearningWindowViewModel(ManagerViewModel myManager)
         {
-            //Testkarte
-            LearningCard t1 = new LearningCard();
-            t1.Question = "Was ist 1 + 1";
-            t1.Answer = "2";
-            LearningCard = t1;
-
+            Manager = myManager;
             BGColor = "white";
-            MyManager = myManager;
+
+            Console.WriteLine("open nico Constructor");
+            CardCollection = Manager.LearningCards.GetEnumerator();
+
+            CardViewModel emptyCard = new CardViewModel();
+            emptyCard.Question = "";
+            emptyCard.Answer = "";
+            emptyCard.Theme = "Mathe";
+            CurrentCard = emptyCard;
+
             CheckAnswer = new RelayCommand(() => VM_CheckAnswer());
             NextCard = new RelayCommand(() => VM_NextCard());
+
         }
 
         private void VM_NextCard()
         {
-            //nächste karte laden
-            BGColor = "white";
-            LearningCard MyNextCard = new LearningCard();
-            MyNextCard.Question = "Nächste Frage";
-            MyNextCard.Answer = "0";
+            CardCollection.MoveNext();
 
-            LearningCard = MyNextCard;
-            Answer = "";
+            //Filter
+            while (CardCollection.Current != null && Theme.Name != CardCollection.Current.Theme)
+            {
+                Console.WriteLine(CardCollection.Current.Question);
+                CardCollection.MoveNext();
+            }
+
+            if (CardCollection.Current == null)
+            {
+                Console.WriteLine("Keine Karten verfügbar");
+            }
+            else
+            {
+                // Hintergrund und Antwort löschen
+                BGColor = "white";
+                Answer = "";
+                CurrentCard = CardCollection.Current;
+            }
+
+
+
         }
 
         private void VM_CheckAnswer()
         {
-            //wenn answer == answer von learncard von collection
 
-            /* TODO: Leaningcard erstellen (simuliert karte von collection)
-             * question löschen (steht ja in der learningCard)
-             * asnwer für VM erzeugen und mit answer aus leaningcard vergleichen
-             */
+            //TODO: Attempt erstellen
 
-            if (Answer == learningCard.Answer)
+            //Antwort Testen (Texterkennung wird noch hinzugefügt)
+            if (Answer == currentCard.Answer)
             {
                 BGColor = "green";
             }
