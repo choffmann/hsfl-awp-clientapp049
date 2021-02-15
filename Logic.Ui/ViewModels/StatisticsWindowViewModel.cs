@@ -173,7 +173,6 @@ namespace De.HsFlensburg.ClientApp049.Logic.Ui.ViewModels
                         totalFail++;
                     }
                 }
-                Console.WriteLine("Thema: " + Themes.Current.Name + " hat " + countCards + " Karten mit " + countAttempts + " Versuchen");
                 themeList.Add(Themes.Current.Name);
                 if (countAttempts < 5)
                 {

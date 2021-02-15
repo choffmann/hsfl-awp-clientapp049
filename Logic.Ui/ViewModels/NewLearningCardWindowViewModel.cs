@@ -78,22 +78,11 @@ namespace De.HsFlensburg.ClientApp049.Logic.Ui.ViewModels
             Console.WriteLine("Konstruktor");
             ManagerObject = model;
             AddLearningCard = new RelayCommand(() => AddLearningCardMethode());
-            //DeserializeFromBinMethode();
         }
         private void SerializeToBinMethode()
         {
             Console.WriteLine("Speichere...");
             BinarySerializerFileHandler.Save(ManagerObject.Model);
-        }
-
-        private void DeserializeFromBinMethode()
-        {
-            if(File.Exists(BinarySerializerFileHandler.filePath))
-            {
-                Console.WriteLine("Lade...");
-                ManagerObject = new ManagerViewModel();
-                ManagerObject.Model = BinarySerializerFileHandler.Load();
-            }
         }
 
         private void AddLearningCardMethode()
