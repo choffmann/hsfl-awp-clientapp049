@@ -38,7 +38,7 @@ namespace De.HsFlensburg.ClientApp049.Logic.Ui
             OpenStatisticsWindow = new RelayCommand(() => OpenStatisticsWindowMethode());
             OpenSaveWindow = new RelayCommand(() => OpenSaveWindowMethode());
 
-            //LobbyWindowVM = new LobbyWindowsViewModel(ManagerObject);
+            LobbyWindowVM = new LobbyWindowsViewModel(ManagerObject);
             
         }
 

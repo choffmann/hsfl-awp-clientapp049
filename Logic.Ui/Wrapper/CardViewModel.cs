@@ -14,11 +14,11 @@ namespace De.HsFlensburg.ClientApp049.Logic.Ui.Wrapper
         private AttemptCollectionViewModel attemptViewModel;
         public CardViewModel(): base()
         {
-            /*CardAttempts = new AttemptCollectionViewModel();
-            this.Model.CardAttempts = CardAttempts.Model;*/
+            CardAttempts = new AttemptCollectionViewModel();
+            this.Model.CardAttempts = CardAttempts.Model;
         }
 
-        /*public AttemptCollectionViewModel CardAttempts
+        public AttemptCollectionViewModel CardAttempts
         {
             get
             {
@@ -29,7 +29,7 @@ namespace De.HsFlensburg.ClientApp049.Logic.Ui.Wrapper
                 attemptViewModel = value;
                 OnPropertyChanged("CardAttempts");
             }
-        }*/
+        }
 
 
         public String Question
@@ -83,10 +83,10 @@ namespace De.HsFlensburg.ClientApp049.Logic.Ui.Wrapper
 
         public override void NewModelAssigned()
         {
-            /*if (this.CardAttempts != null)
+            if (this.CardAttempts != null)
             {
                 this.CardAttempts.Model = this.Model?.CardAttempts;
-            }*/
+            }
         }
     }
 }

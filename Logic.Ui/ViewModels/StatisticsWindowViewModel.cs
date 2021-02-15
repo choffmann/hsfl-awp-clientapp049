@@ -69,20 +69,6 @@ namespace De.HsFlensburg.ClientApp049.Logic.Ui.ViewModels
             }
         }
 
-        public CardViewModel cvm;
-        public CardViewModel CardVM
-        {
-            get
-            {
-                return cvm;
-            }
-            set
-            {
-                cvm = value;
-                OnPropertyChanged("CardVM");
-            }
-        }
-
         public RelayCommand CloseWindow { get; }
 
         public StatisticsWindowViewModel(ManagerViewModel model)
@@ -136,13 +122,25 @@ namespace De.HsFlensburg.ClientApp049.Logic.Ui.ViewModels
             cvm.Box = 3;
             ManagerObject.LearningCards.Add(cvm);*/
 
+            CardViewModel cvm = new CardViewModel();
             AttemptViewModel attempt = new AttemptViewModel();
             attempt.AttemptDate = DateTime.Today;
-            attempt.Success = true;
+            attempt.Success = false;
 
-           // CardVM.CardAttempts.Add(attempt);
+            cvm.CardAttempts.Add(attempt);
 
-            
+            Console.WriteLine(cvm.CardAttempts.Count);
+
+            AttemptViewModel attempt2 = new AttemptViewModel();
+
+            attempt2.AttemptDate = DateTime.Today;
+            attempt2.Success = true;
+
+            cvm.CardAttempts.Add(attempt2);
+
+            Console.WriteLine(cvm.CardAttempts.Count);
+
+            ManagerObject.LearningCards.Add(cvm);
 
             /*CardViewModel cvm1 = new CardViewModel();
             AttemptViewModel attempt1 = new AttemptViewModel();
