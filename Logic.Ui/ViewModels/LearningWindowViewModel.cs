@@ -1,7 +1,10 @@
-﻿using De.HsFlensburg.ClientApp049.Business.Model.BusinessObjects;
+﻿using BinarySerializer;
+using De.HsFlensburg.ClientApp049.Business.Model.BusinessObjects;
 using De.HsFlensburg.ClientApp049.Logic.Ui.Wrapper;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
+using System.IO;
 
 namespace De.HsFlensburg.ClientApp049.Logic.Ui.ViewModels
 {
@@ -10,51 +13,99 @@ namespace De.HsFlensburg.ClientApp049.Logic.Ui.ViewModels
         public RelayCommand CheckAnswer { get; }
         public RelayCommand NextCard { get; }
         public event PropertyChangedEventHandler PropertyChanged;
-        public ManagerViewModel MyManager;
-        private LearningCard learningCard;
+        public ManagerViewModel manager;
+        private IEnumerator<CardViewModel> cardCollection;
+        private CardViewModel emptyCard;
+        private CardViewModel currentCard;
+        private ThemeViewModel theme;
         private String answer;
+        private String currentBox;
+        private int selectedBox;
         private String bgColor;
+        private int right;
+        private int wrong;
 
 
-        public ManagerViewModel ManagerVM
+
+        public ManagerViewModel Manager
         {
             get
             {
-                return MyManager;
+                return manager;
             }
 
             set
             {
-                MyManager = value;
-                OnPropertyChanged("ManagerVM");
+                manager = value;
+                OnPropertyChanged("Manager");
             }
         }
 
-
-
-
-        private LearningCard LearningCard
+        private IEnumerator<CardViewModel> CardCollection
         {
             get
             {
-                return this.learningCard;
+                return this.cardCollection;
             }
             set
             {
-                this.learningCard = value;
-                OnPropertyChanged("LearningCard");
-                OnPropertyChanged("Question");
+                this.cardCollection = value;
+                OnPropertyChanged("CardCollection");
             }
         }
 
-        public String Question
+        public CardViewModel CurrentCard
         {
             get
             {
-                return this.learningCard.Question;
+                return this.currentCard;
+            }
+            set
+            {
+                this.currentCard = value;
+                OnPropertyChanged("CurrentCard");
+            }
+        }
+        public String CurrentBox
+        {
+            get
+            {
+                return this.currentBox;
+            }
+            set
+            {
+                this.currentBox = value;
+                Reset();
+                OnPropertyChanged("CurrentBox");
             }
         }
 
+        public int SelectedBox
+        {
+            get
+            {
+                return this.selectedBox;
+            }
+
+            set
+            {
+                this.selectedBox = value;
+                OnPropertyChanged("SelectedBox");
+            }
+        }
+        public ThemeViewModel Theme
+        {
+            get
+            {
+                return this.theme;
+            }
+            set
+            {
+                this.theme = value;
+                Reset();
+                OnPropertyChanged("Theme");
+            }
+        }
         public String Answer
         {
             get
@@ -70,7 +121,6 @@ namespace De.HsFlensburg.ClientApp049.Logic.Ui.ViewModels
                 OnPropertyChanged("Answer");
             }
         }
-
         public String BGColor
         {
             get
@@ -84,7 +134,21 @@ namespace De.HsFlensburg.ClientApp049.Logic.Ui.ViewModels
             }
         }
 
+        public String Right
+        {
+            get
+            {
+                return "Richtig: " + this.right;
+            }
+        }
 
+        public String Wrong
+        {
+            get
+            {
+                return "Falsch: " + this.wrong;
+            }
+        }
         protected void OnPropertyChanged(string propertyName)
         {
             if (PropertyChanged != null)
@@ -96,47 +160,122 @@ namespace De.HsFlensburg.ClientApp049.Logic.Ui.ViewModels
         public LearningWindowViewModel() { }
         public LearningWindowViewModel(ManagerViewModel myManager)
         {
-            //Testkarte
-            LearningCard t1 = new LearningCard();
-            t1.Question = "Was ist 1 + 1";
-            t1.Answer = "2";
-            LearningCard = t1;
-
+            Manager = myManager;
             BGColor = "white";
-            MyManager = myManager;
+            CardCollection = Manager.LearningCards.GetEnumerator();
+
+            CurrentBox = "12345";
+            selectedBox = 0;
+
+            right = 0;
+            wrong = 0;
+
+            emptyCard = new CardViewModel();
+            emptyCard.Question = "";
+            emptyCard.Answer = "";
+            emptyCard.Theme = "Mathe";
+            CurrentCard = emptyCard;
+
             CheckAnswer = new RelayCommand(() => VM_CheckAnswer());
             NextCard = new RelayCommand(() => VM_NextCard());
+
         }
 
         private void VM_NextCard()
         {
-            //nächste karte laden
-            BGColor = "white";
-            LearningCard MyNextCard = new LearningCard();
-            MyNextCard.Question = "Nächste Frage";
-            MyNextCard.Answer = "0";
 
-            LearningCard = MyNextCard;
-            Answer = "";
+
+            Boolean found = false;
+
+            CardCollection.MoveNext();
+
+            while (!found && CardCollection.Current != null)
+            {
+                //Filter
+                if (CardCollection.Current.Box == SelectedBox && CardCollection.Current.Theme == Theme.Name)
+                {
+                    //Hintergrund und Antwort löschen
+                    BGColor = "white";
+                    Answer = "";
+                    CurrentCard = CardCollection.Current;
+                    found = true;
+                }
+                else
+                {
+                    CardCollection.MoveNext();
+
+                }
+            }
+
+            if (CardCollection.Current == null)
+            {
+                Reset();
+                Answer = "Keine Weiteren Karten verfügbar";
+                BGColor = "yellow";
+            }
+
+
         }
 
         private void VM_CheckAnswer()
         {
-            //wenn answer == answer von learncard von collection
 
-            /* TODO: Leaningcard erstellen (simuliert karte von collection)
-             * question löschen (steht ja in der learningCard)
-             * asnwer für VM erzeugen und mit answer aus leaningcard vergleichen
-             */
+            //Attempt erstellen
+            AttemptViewModel temp = new AttemptViewModel();
+            temp.AttemptDate = DateTime.Today;
 
-            if (Answer == learningCard.Answer)
+            //wenn die leere Karte geladen ist, soll nicht gespeichert werden
+            if (CurrentCard.Equals(emptyCard))
             {
-                BGColor = "green";
+                Console.WriteLine("leer");
             }
             else
             {
-                BGColor = "red";
+
+                //Antwort Testen (Texterkennung wird noch hinzugefügt)
+                if (Answer == CurrentCard.Answer)
+                {
+                    Answer = "";
+                    temp.Success = true;
+
+                    if (CurrentCard.Box >= 4)
+                    {
+                        CurrentCard.Box = 0;
+                    }
+                    else
+                    {
+                        CurrentCard.Box++;
+                    }
+                    right++;
+                    OnPropertyChanged("Right");
+                    CurrentCard.CardAttempts.Add(temp);
+                    VM_NextCard();
+                    BGColor = "green";
+                }
+                else
+                {
+                    BGColor = "red";
+                    temp.Success = false;
+                    wrong++;
+                    OnPropertyChanged("Wrong");
+                    CurrentCard.CardAttempts.Add(temp);
+                }
+                SerializeToBinMethode();
             }
+        }
+
+        private void SerializeToBinMethode()
+        {
+            Console.WriteLine("Speichere...");
+            BinarySerializerFileHandler.Save(Manager.Model);
+        }
+
+        private void Reset()
+        {
+            Answer = "";
+            BGColor = "white";
+            CurrentCard = emptyCard;
+            CardCollection.Reset();
         }
     }
 }
