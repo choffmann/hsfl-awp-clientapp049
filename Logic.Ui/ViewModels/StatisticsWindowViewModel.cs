@@ -140,7 +140,7 @@ namespace De.HsFlensburg.ClientApp049.Logic.Ui.ViewModels
             attempt.AttemptDate = DateTime.Today;
             attempt.Success = true;
 
-            CardVM.CardAttempts.Add(attempt);
+           // CardVM.CardAttempts.Add(attempt);
 
             
 

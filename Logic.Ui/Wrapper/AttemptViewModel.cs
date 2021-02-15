@@ -40,7 +40,6 @@ namespace De.HsFlensburg.ClientApp049.Logic.Ui.Wrapper
 
         public override void NewModelAssigned()
         {
-            throw new NotImplementedException();
         }
     }
 }
