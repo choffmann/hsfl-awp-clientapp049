@@ -10,6 +10,10 @@ namespace De.HsFlensburg.ClientApp049.Ui.Desktop.MessageBusLogic
 {
     public class MessageListener
     {
+        public NewLearningCardWindow NewLearningCard { get; set; }
+        public LearnWindow LearningWindow { get; set; }
+        public SaveWindow SaveingWindow { get; set; }
+        public StatisticsWindow StatisticWindow { get; set; }
         public bool BindableProperty => true;
         public MessageListener()
         {
@@ -17,10 +21,9 @@ namespace De.HsFlensburg.ClientApp049.Ui.Desktop.MessageBusLogic
         }
 
         private void InitMessenger()
-        {
-            NewLearningCardWindow newLearningCard = new NewLearningCardWindow();
-            StatisticsWindow statistics = new StatisticsWindow();
+        {   
             ServiceBus.Instance.Register<OpenNewLearningCardWindowMessage>(this, delegate () {
+                NewLearningCardWindow newLearningCard = new NewLearningCardWindow();
                 newLearningCard.ShowDialog();
             });
 
@@ -35,11 +38,11 @@ namespace De.HsFlensburg.ClientApp049.Ui.Desktop.MessageBusLogic
             });
 
             ServiceBus.Instance.Register<OpenStatisticsWindowMessage>(this, delegate () {
-                statistics = new StatisticsWindow();
+                StatisticsWindow statistics = new StatisticsWindow();
                 statistics.ShowDialog();
             });
 
-            ServiceBus.Instance.Register<CloseNewLearningCardWindowMessage>(this, delegate () {
+            /*ServiceBus.Instance.Register<CloseNewLearningCardWindowMessage>(this, delegate () {
                 newLearningCard.Close();
                 newLearningCard = new NewLearningCardWindow();
             });
@@ -47,7 +50,7 @@ namespace De.HsFlensburg.ClientApp049.Ui.Desktop.MessageBusLogic
             ServiceBus.Instance.Register<CloseStatisticsWindowMessage>(this, delegate () {
                 statistics.Close();
                 statistics = new StatisticsWindow();
-            });
+            });*/
         }
     }
 }

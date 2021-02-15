@@ -75,6 +75,7 @@ namespace De.HsFlensburg.ClientApp049.Logic.Ui.ViewModels
         public event PropertyChangedEventHandler PropertyChanged;
         public NewLearningCardWindowViewModel(ManagerViewModel model)
         {
+            Console.WriteLine("Konstruktor");
             ManagerObject = model;
             AddLearningCard = new RelayCommand(() => AddLearningCardMethode());
             CloseWindow = new RelayCommand(() => CloseWindowMethode());

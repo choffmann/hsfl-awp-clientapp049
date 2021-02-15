@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="LobbyWindow" Height="450" Width="800">
     <Window.DataContext>
-        <Binding Source="{StaticResource ViewModelLocator}" Path="LobbyWindowVM"></Binding>
+        <Binding Source="{StaticResource ViewModelLocator}"></Binding>
     </Window.DataContext>
     <Window.IsEnabled>
         <Binding Source="{StaticResource MessageListener}" Path="BinableProperty"></Binding>
@@ -19,7 +19,7 @@
             <ColumnDefinition/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <Button Content="Karten anlegen" Grid.Column="0" HorizontalAlignment="Center"  VerticalAlignment="Center" Width="150" Height="150" Command="{Binding OpenNewLearningCardWindow, Mode=OneWay}"/>
+        <Button Content="Karten anlegen" Grid.Column="0" HorizontalAlignment="Center"  VerticalAlignment="Center" Width="150" Height="150" Command="{Binding OpenNewLearningCard, Mode=OneWay}"/>
         <Button Content="Lernen" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Width="150" Height="150" Command="{Binding OpenLearningWindow, Mode=OneWay}"/>
         <Button Content="Statistik" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center" Width="150" Height="150" Command="{Binding OpenStatisticsWindow, Mode=OneWay}"/>
         <Button Content="Laden/Speichern" Grid.Column="3" HorizontalAlignment="Center" VerticalAlignment="Center" Width="150" Height="150" Command="{Binding OpenSaveWindow, Mode=OneWay}" />

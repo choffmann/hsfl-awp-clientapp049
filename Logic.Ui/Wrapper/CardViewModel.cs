@@ -30,7 +30,7 @@ namespace De.HsFlensburg.ClientApp049.Logic.Ui.Wrapper
                 OnPropertyChanged("CardAttempts");
             }
         }*/
-        
+
 
         public String Question
         {
@@ -83,7 +83,7 @@ namespace De.HsFlensburg.ClientApp049.Logic.Ui.Wrapper
 
         public override void NewModelAssigned()
         {
-           /* if(this.CardAttempts != null)
+            /*if (this.CardAttempts != null)
             {
                 this.CardAttempts.Model = this.Model?.CardAttempts;
             }*/
