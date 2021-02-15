@@ -78,15 +78,8 @@ namespace De.HsFlensburg.ClientApp049.Logic.Ui.ViewModels
             Console.WriteLine("Konstruktor");
             ManagerObject = model;
             AddLearningCard = new RelayCommand(() => AddLearningCardMethode());
-            CloseWindow = new RelayCommand(() => CloseWindowMethode());
             //DeserializeFromBinMethode();
         }
-
-        private void CloseWindowMethode()
-        {
-            ServiceBus.Instance.Send(new CloseNewLearningCardWindowMessage());
-        }
-
         private void SerializeToBinMethode()
         {
             Console.WriteLine("Speichere...");

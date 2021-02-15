@@ -41,8 +41,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="MessageBusMessages\CloseNewLearningCardWindowMessage.cs" />
-    <Compile Include="MessageBusMessages\CloseStatisticsWindowMessage.cs" />
     <Compile Include="MessageBusMessages\OpenLearningWindowMessage.cs" />
     <Compile Include="MessageBusMessages\OpenNewLearningCardWindowMessage.cs" />
     <Compile Include="MessageBusMessages\OpenSaveWindowMessage.cs" />

@@ -133,6 +133,8 @@ namespace De.HsFlensburg.ClientApp049.Logic.Ui.ViewModels
             List<double> valueList = new List<double>();
             List<String> themeList = new List<String>();
             List<String> toolTipList = new List<String>();
+            List<int> totalList = new List<int>();
+            List<int> failList = new List<int>();
             var v = ManagerObject.LearningCards.GetEnumerator();
             v.MoveNext();
             if(v.Current == null)
@@ -144,6 +146,7 @@ namespace De.HsFlensburg.ClientApp049.Logic.Ui.ViewModels
             int total = 0;
             int totalSuc = 0;
             int totalFail = 0;
+            int globalMessureBar = 0;
             while (Themes.Current != null)
             {
                 int countCards = 0;
@@ -172,28 +175,24 @@ namespace De.HsFlensburg.ClientApp049.Logic.Ui.ViewModels
                 }
                 Console.WriteLine("Thema: " + Themes.Current.Name + " hat " + countCards + " Karten mit " + countAttempts + " Versuchen");
                 themeList.Add(Themes.Current.Name);
-                if(countAttempts < 30)
+                if (countAttempts < 5)
                 {
-                    valueList.Add(countAttempts * 5);
+                    globalMessureBar = 50;
+                } else if (countAttempts > 30 && countAttempts < 50)
+                {
+                    globalMessureBar = 5;
                 } else
                 {
-                    valueList.Add(countAttempts * 2);
+                    globalMessureBar = 2;
                 }
-
+                valueList.Add(countAttempts * globalMessureBar);
                 toolTipList.Add("Gesamt: " + countAttempts + "\nErfolgreich: " + success + "\nErfolglos: " + failed);
                 Themes.MoveNext();
             }
-
-            StatisticBars = new StatisticBars(valueList, themeList, toolTipList);
             Total = "" + total;
             TotalSuccess = "" + totalSuc;
             TotalFailed = "" + totalFail;
             StatisticBars = new StatisticBars(valueList, themeList, toolTipList);
-        }
-
-        private void CheckTopLimit(double value)
-        {
-
         }
 
         private void CreateTestDataMethode()

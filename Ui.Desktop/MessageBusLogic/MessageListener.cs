@@ -41,16 +41,6 @@ namespace De.HsFlensburg.ClientApp049.Ui.Desktop.MessageBusLogic
                 StatisticsWindow statistics = new StatisticsWindow();
                 statistics.ShowDialog();
             });
-
-            /*ServiceBus.Instance.Register<CloseNewLearningCardWindowMessage>(this, delegate () {
-                newLearningCard.Close();
-                newLearningCard = new NewLearningCardWindow();
-            });
-
-            ServiceBus.Instance.Register<CloseStatisticsWindowMessage>(this, delegate () {
-                statistics.Close();
-                statistics = new StatisticsWindow();
-            });*/
         }
     }
 }
