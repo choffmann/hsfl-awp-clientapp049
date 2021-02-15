@@ -76,7 +76,7 @@ namespace De.HsFlensburg.ClientApp049.Logic.Ui.ViewModels
             ManagerObject = model;
             AddLearningCard = new RelayCommand(() => AddLearningCardMethode());
             DeserializeFromBin = new RelayCommand(() => DeserializeFromBinMethode());
-            DeserializeFromBinMethode();
+            //DeserializeFromBinMethode();
         }
 
         private void SerializeToBinMethode()

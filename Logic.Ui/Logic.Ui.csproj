@@ -58,6 +58,7 @@
     <Compile Include="Wrapper\AbstractViewModels\IViewModel.cs" />
     <Compile Include="Wrapper\AbstractViewModels\ViewModelBase.cs" />
     <Compile Include="Wrapper\AbstractViewModels\ViewModelSyncCollections.cs" />
+    <Compile Include="Wrapper\AttemptViewModel.cs" />
     <Compile Include="Wrapper\CardCollectionViewModel.cs" />
     <Compile Include="Wrapper\CardViewModel.cs" />
     <Compile Include="Wrapper\ClientCollectionViewModel.cs" />

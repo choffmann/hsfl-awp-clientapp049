@@ -71,7 +71,7 @@ namespace De.HsFlensburg.ClientApp049.Logic.Ui.ViewModels
         }
         private void AddThemes()
         {
-            DeserializeFromBinMethode();
+            //DeserializeFromBinMethode();
             ManagerObject.Themes.Clear();
             ThemeViewModel themeVM;
             String[] theme = { "Mathe", "Deutsch", "Englisch" };

@@ -54,5 +54,10 @@
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
         </Canvas>
+        <ListBox x:Name="listBox" HorizontalAlignment="Left" Grid.Row="1" VerticalAlignment="Top" Height="70" Margin="10,10,0,0" Width="191" ItemsSource="{Binding Path=ManagerObject.LearningCards}" SelectedItem="{Binding SelectedItem}">
+            <!--<ListBoxItem>Heute</ListBoxItem>
+            <ListBoxItem>Letzte 7 Tage</ListBoxItem>
+            <ListBoxItem>Letzte 30 Tage</ListBoxItem>-->
+        </ListBox>
     </Grid>
 </Window>
