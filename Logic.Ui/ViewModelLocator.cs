@@ -38,6 +38,9 @@ namespace De.HsFlensburg.ClientApp049.Logic.Ui
                 Console.WriteLine("Lade...");
                 ManagerObject = new ManagerViewModel();
                 ManagerObject.Model = BinarySerializerFileHandler.Load();
+            } else
+            {
+                ManagerObject = new ManagerViewModel();
             }
         }
     }

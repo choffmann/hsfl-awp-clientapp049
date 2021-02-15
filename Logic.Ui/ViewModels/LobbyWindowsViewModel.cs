@@ -72,7 +72,10 @@ namespace De.HsFlensburg.ClientApp049.Logic.Ui.ViewModels
         private void AddThemes()
         {
             //DeserializeFromBinMethode();
-            ManagerObject.Themes.Clear();
+            if (File.Exists(BinarySerializerFileHandler.filePath))
+            {
+                ManagerObject.Themes.Clear();
+            }
             ThemeViewModel themeVM;
             String[] theme = { "Mathe", "Deutsch", "Englisch" };
             for (int i = 0; i < theme.Length; i++)
