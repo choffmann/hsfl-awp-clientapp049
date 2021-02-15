@@ -30,14 +30,10 @@
         <TextBlock Grid.Row="0" Grid.Column="1" Text="15" FontSize="22" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,45,0,0"></TextBlock>
         <TextBlock Grid.Row="0" Grid.Column="1" Text="10" FontSize="22" FontWeight="Bold" VerticalAlignment="Center"  Margin="0,45,60,0" TextAlignment="Right"></TextBlock>
 
-        <!--Chart-->
-        <TextBlock Grid.Row="1" Grid.Column="1" Text="Chart" FontSize="36" FontWeight="Bold" TextAlignment="Center" VerticalAlignment="Center"/>
-
         <Rectangle Grid.Column="0" Stroke="LightGray" Grid.RowSpan="2" Width="1" HorizontalAlignment="Right"/>
         <Rectangle Grid.Row="1" Grid.Column="2" Stroke="LightGray" Height="1" VerticalAlignment="Top"></Rectangle>
 
         <Button Grid.Row="1" Grid.Column="0" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="20,0,0,10" Padding="40,10" Width="133">Back</Button>
-        <Button Grid.Row="1" Grid.Column="0" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="20,0,0,60" Padding="40,10" Click="Button_Click">Draw Test</Button>
         <Canvas Grid.Column="1" HorizontalAlignment="Left" Height="596" Grid.Row="1" VerticalAlignment="Top" Width="805" Name="canvas">
             <ItemsControl ItemsSource="{Binding StatisticBars}">
                 <ItemsControl.ItemsPanel>
