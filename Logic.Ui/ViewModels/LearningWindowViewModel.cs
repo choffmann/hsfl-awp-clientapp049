@@ -18,6 +18,8 @@ namespace De.HsFlensburg.ClientApp049.Logic.Ui.ViewModels
         private CardViewModel currentCard;
         private ThemeViewModel theme;
         private String answer;
+        private String currentBox;
+        private int selectedBox;
         private String bgColor;
 
 
@@ -61,7 +63,32 @@ namespace De.HsFlensburg.ClientApp049.Logic.Ui.ViewModels
                 OnPropertyChanged("CurrentCard");
             }
         }
+        public String CurrentBox
+        {
+            get
+            {
+                return this.currentBox;
+            }
+            set
+            {
+                this.currentBox = value;
+                OnPropertyChanged("CurrentBox");
+            }
+        }
 
+        public int SelectedBox
+        {
+            get
+            {
+                return this.selectedBox;
+            }
+
+            set
+            {
+                this.selectedBox = value;
+                OnPropertyChanged("SelectedBox");
+            }
+        }
         public ThemeViewModel Theme
         {
             get
@@ -89,7 +116,6 @@ namespace De.HsFlensburg.ClientApp049.Logic.Ui.ViewModels
                 OnPropertyChanged("Answer");
             }
         }
-
         public String BGColor
         {
             get
@@ -102,7 +128,6 @@ namespace De.HsFlensburg.ClientApp049.Logic.Ui.ViewModels
                 OnPropertyChanged("BGColor");
             }
         }
-
 
         protected void OnPropertyChanged(string propertyName)
         {
@@ -117,9 +142,10 @@ namespace De.HsFlensburg.ClientApp049.Logic.Ui.ViewModels
         {
             Manager = myManager;
             BGColor = "white";
-
-            Console.WriteLine("open nico Constructor");
             CardCollection = Manager.LearningCards.GetEnumerator();
+
+            CurrentBox = "12345";
+            selectedBox = 0;
 
             CardViewModel emptyCard = new CardViewModel();
             emptyCard.Question = "";
@@ -134,27 +160,36 @@ namespace De.HsFlensburg.ClientApp049.Logic.Ui.ViewModels
 
         private void VM_NextCard()
         {
+
+
+            Boolean found = false;
+
             CardCollection.MoveNext();
 
-            //Filter
-            while (CardCollection.Current != null && Theme.Name != CardCollection.Current.Theme)
+            while (!found && CardCollection.Current != null)
             {
-                Console.WriteLine(CardCollection.Current.Question);
-                CardCollection.MoveNext();
+                //Filter
+                if (CardCollection.Current.Box == SelectedBox && CardCollection.Current.Theme == Theme.Name)
+                {
+                    //Hintergrund und Antwort löschen
+                    BGColor = "white";
+                    Answer = "";
+                    CurrentCard = CardCollection.Current;
+                    found = true;
+                }
+                else
+                {
+                    CardCollection.MoveNext();
+
+                }
             }
 
             if (CardCollection.Current == null)
             {
-                Console.WriteLine("Keine Karten verfügbar");
+                Answer = "Keine Weiteren Karten verfügbar";
+                BGColor = "yellow";
+                CardCollection.Reset();
             }
-            else
-            {
-                // Hintergrund und Antwort löschen
-                BGColor = "white";
-                Answer = "";
-                CurrentCard = CardCollection.Current;
-            }
-
 
 
         }
@@ -163,16 +198,36 @@ namespace De.HsFlensburg.ClientApp049.Logic.Ui.ViewModels
         {
 
             //TODO: Attempt erstellen
+            AttemptViewModel test = new AttemptViewModel();
+            test.AttemptDate = DateTime.Today;
 
             //Antwort Testen (Texterkennung wird noch hinzugefügt)
-            if (Answer == currentCard.Answer)
+            if (Answer == CurrentCard.Answer)
             {
                 BGColor = "green";
+                test.Success = true;
+                if (CurrentCard.Box >= 4)
+                {
+                    CurrentCard.Box = 0;
+                }
+                else
+                {
+                    CurrentCard.Box++;
+                }
             }
             else
             {
                 BGColor = "red";
+                test.Success = false;
             }
+            CurrentCard.CardAttempts.Add(test);
+            SerializeToBinMethode();
+        }
+
+        private void SerializeToBinMethode()
+        {
+            Console.WriteLine("Speichere...");
+            BinarySerializerFileHandler.Save(Manager.Model);
         }
     }
 }
