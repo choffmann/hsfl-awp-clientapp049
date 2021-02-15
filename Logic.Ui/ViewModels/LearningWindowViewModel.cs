@@ -15,12 +15,15 @@ namespace De.HsFlensburg.ClientApp049.Logic.Ui.ViewModels
         public event PropertyChangedEventHandler PropertyChanged;
         public ManagerViewModel manager;
         private IEnumerator<CardViewModel> cardCollection;
+        private CardViewModel emptyCard;
         private CardViewModel currentCard;
         private ThemeViewModel theme;
         private String answer;
         private String currentBox;
         private int selectedBox;
         private String bgColor;
+        private int right;
+        private int wrong;
 
 
 
@@ -72,6 +75,7 @@ namespace De.HsFlensburg.ClientApp049.Logic.Ui.ViewModels
             set
             {
                 this.currentBox = value;
+                Reset();
                 OnPropertyChanged("CurrentBox");
             }
         }
@@ -98,6 +102,7 @@ namespace De.HsFlensburg.ClientApp049.Logic.Ui.ViewModels
             set
             {
                 this.theme = value;
+                Reset();
                 OnPropertyChanged("Theme");
             }
         }
@@ -129,6 +134,21 @@ namespace De.HsFlensburg.ClientApp049.Logic.Ui.ViewModels
             }
         }
 
+        public String Right
+        {
+            get
+            {
+                return "Richtig: " + this.right;
+            }
+        }
+
+        public String Wrong
+        {
+            get
+            {
+                return "Falsch: " + this.wrong;
+            }
+        }
         protected void OnPropertyChanged(string propertyName)
         {
             if (PropertyChanged != null)
@@ -147,7 +167,10 @@ namespace De.HsFlensburg.ClientApp049.Logic.Ui.ViewModels
             CurrentBox = "12345";
             selectedBox = 0;
 
-            CardViewModel emptyCard = new CardViewModel();
+            right = 0;
+            wrong = 0;
+
+            emptyCard = new CardViewModel();
             emptyCard.Question = "";
             emptyCard.Answer = "";
             emptyCard.Theme = "Mathe";
@@ -186,9 +209,9 @@ namespace De.HsFlensburg.ClientApp049.Logic.Ui.ViewModels
 
             if (CardCollection.Current == null)
             {
+                Reset();
                 Answer = "Keine Weiteren Karten verfügbar";
                 BGColor = "yellow";
-                CardCollection.Reset();
             }
 
 
@@ -197,37 +220,58 @@ namespace De.HsFlensburg.ClientApp049.Logic.Ui.ViewModels
         private void VM_CheckAnswer()
         {
 
-            //TODO: Attempt erstellen
+            //Attempt erstellen
             AttemptViewModel test = new AttemptViewModel();
             test.AttemptDate = DateTime.Today;
 
-            //Antwort Testen (Texterkennung wird noch hinzugefügt)
-            if (Answer == CurrentCard.Answer)
+            //wenn die leere Karte geladen ist, soll nicht gespeichert werden
+            if (CurrentCard.Equals(emptyCard))
             {
-                BGColor = "green";
-                test.Success = true;
-                if (CurrentCard.Box >= 4)
-                {
-                    CurrentCard.Box = 0;
-                }
-                else
-                {
-                    CurrentCard.Box++;
-                }
+                Console.WriteLine("leer");
             }
             else
             {
-                BGColor = "red";
-                test.Success = false;
+
+                //Antwort Testen (Texterkennung wird noch hinzugefügt)
+                if (Answer == CurrentCard.Answer)
+                {
+                    BGColor = "green";
+                    test.Success = true;
+                    if (CurrentCard.Box >= 4)
+                    {
+                        CurrentCard.Box = 0;
+                    }
+                    else
+                    {
+                        CurrentCard.Box++;
+                    }
+                    right++;
+                    OnPropertyChanged("Right");
+                }
+                else
+                {
+                    BGColor = "red";
+                    test.Success = false;
+                    wrong++;
+                    OnPropertyChanged("Wrong");
+                }
+                CurrentCard.CardAttempts.Add(test);
+                SerializeToBinMethode();
             }
-            CurrentCard.CardAttempts.Add(test);
-            SerializeToBinMethode();
         }
 
         private void SerializeToBinMethode()
         {
             Console.WriteLine("Speichere...");
             BinarySerializerFileHandler.Save(Manager.Model);
+        }
+
+        private void Reset()
+        {
+            Answer = "";
+            BGColor = "white";
+            CurrentCard = emptyCard;
+            CardCollection.Reset();
         }
     }
 }
