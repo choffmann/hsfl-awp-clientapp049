@@ -18,9 +18,10 @@ namespace De.HsFlensburg.ClientApp049.Ui.Desktop.MessageBusLogic
 
         private void InitMessenger()
         {
+            NewLearningCardWindow newLearningCard = new NewLearningCardWindow();
+            StatisticsWindow statistics = new StatisticsWindow();
             ServiceBus.Instance.Register<OpenNewLearningCardWindowMessage>(this, delegate () {
-                NewLearningCardWindow myWindow = new NewLearningCardWindow();
-                myWindow.ShowDialog();
+                newLearningCard.ShowDialog();
             });
 
             ServiceBus.Instance.Register<OpenLearningWindowMessage>(this, delegate () {
@@ -34,8 +35,18 @@ namespace De.HsFlensburg.ClientApp049.Ui.Desktop.MessageBusLogic
             });
 
             ServiceBus.Instance.Register<OpenStatisticsWindowMessage>(this, delegate () {
-                StatisticsWindow statistics = new StatisticsWindow();
+                statistics = new StatisticsWindow();
                 statistics.ShowDialog();
+            });
+
+            ServiceBus.Instance.Register<CloseNewLearningCardWindowMessage>(this, delegate () {
+                newLearningCard.Close();
+                newLearningCard = new NewLearningCardWindow();
+            });
+
+            ServiceBus.Instance.Register<CloseStatisticsWindowMessage>(this, delegate () {
+                statistics.Close();
+                statistics = new StatisticsWindow();
             });
         }
     }
