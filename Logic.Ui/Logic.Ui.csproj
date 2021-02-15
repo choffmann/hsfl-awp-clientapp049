@@ -51,7 +51,6 @@
     <Compile Include="ViewModels\Chart\BarItem.cs" />
     <Compile Include="ViewModels\Chart\StatisticBars.cs" />
     <Compile Include="ViewModels\Chart\StatisticsBarCollection.cs" />
-    <Compile Include="ViewModels\LearningCardWindowViewModel.cs" />
     <Compile Include="ViewModels\LearningWindowViewModel.cs" />
     <Compile Include="ViewModels\LobbyWindowsViewModel.cs" />
     <Compile Include="ViewModels\NewLearningCardWindowViewModel.cs" />
