@@ -221,8 +221,8 @@ namespace De.HsFlensburg.ClientApp049.Logic.Ui.ViewModels
         {
 
             //Attempt erstellen
-            AttemptViewModel test = new AttemptViewModel();
-            test.AttemptDate = DateTime.Today;
+            AttemptViewModel temp = new AttemptViewModel();
+            temp.AttemptDate = DateTime.Today;
 
             //wenn die leere Karte geladen ist, soll nicht gespeichert werden
             if (CurrentCard.Equals(emptyCard))
@@ -235,8 +235,9 @@ namespace De.HsFlensburg.ClientApp049.Logic.Ui.ViewModels
                 //Antwort Testen (Texterkennung wird noch hinzugefügt)
                 if (Answer == CurrentCard.Answer)
                 {
-                    BGColor = "green";
-                    test.Success = true;
+                    Answer = "";
+                    temp.Success = true;
+
                     if (CurrentCard.Box >= 4)
                     {
                         CurrentCard.Box = 0;
@@ -247,15 +248,18 @@ namespace De.HsFlensburg.ClientApp049.Logic.Ui.ViewModels
                     }
                     right++;
                     OnPropertyChanged("Right");
+                    CurrentCard.CardAttempts.Add(temp);
+                    VM_NextCard();
+                    BGColor = "green";
                 }
                 else
                 {
                     BGColor = "red";
-                    test.Success = false;
+                    temp.Success = false;
                     wrong++;
                     OnPropertyChanged("Wrong");
+                    CurrentCard.CardAttempts.Add(temp);
                 }
-                CurrentCard.CardAttempts.Add(test);
                 SerializeToBinMethode();
             }
         }
