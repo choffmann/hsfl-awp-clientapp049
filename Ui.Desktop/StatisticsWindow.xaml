@@ -18,23 +18,24 @@
             <RowDefinition Height="141*"></RowDefinition>
             <RowDefinition Height="596*"></RowDefinition>
         </Grid.RowDefinitions>
+        <DataGrid ItemsSource="{Binding CardVM.CardAttempts}"></DataGrid>
 
-        <TextBlock Grid.Row="0" Grid.Column="1" Text="Statistik" TextAlignment="Center" FontSize="32" FontWeight="Bold" HorizontalAlignment="Center" Margin="0,5,0,0"></TextBlock>
+        <TextBlock Grid.Row="0" Grid.Column="1" Text="Versuche" TextAlignment="Center" FontSize="32" FontWeight="Bold" HorizontalAlignment="Center" Margin="0,5,0,0"></TextBlock>
         <!--Topic Stats-->
         <TextBlock Grid.Row="0" Grid.Column="1" Text="Gesamt" FontSize="22" FontWeight="Bold" VerticalAlignment="Center" Margin="30,0,0,0"></TextBlock>
         <TextBlock Grid.Row="0" Grid.Column="1" Text="Erfolgreich" FontSize="22" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
         <TextBlock Grid.Row="0" Grid.Column="1" Text="Erfolglos" FontSize="22" FontWeight="Bold" VerticalAlignment="Center" Margin="0,0,30,0" TextAlignment="Right"></TextBlock>
         <!--Stats value-->
-        <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding Path=TotalCards}" FontSize="22" FontWeight="Bold" VerticalAlignment="Center" Margin="50,45,0,0"></TextBlock>
-        <TextBlock Grid.Row="0" Grid.Column="1" Text="15" FontSize="22" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,45,0,0"></TextBlock>
-        <TextBlock Grid.Row="0" Grid.Column="1" Text="10" FontSize="22" FontWeight="Bold" VerticalAlignment="Center"  Margin="0,45,60,0" TextAlignment="Right"></TextBlock>
+        <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding Path=Total}" FontSize="22" FontWeight="Bold" VerticalAlignment="Center" Margin="50,45,0,0"></TextBlock>
+        <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding Path=TotalSuccess}" FontSize="22" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,45,0,0"></TextBlock>
+        <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding Path=TotalFailed}" FontSize="22" FontWeight="Bold" VerticalAlignment="Center"  Margin="0,45,60,0" TextAlignment="Right"></TextBlock>
 
         <Rectangle Grid.Column="0" Stroke="LightGray" Grid.RowSpan="2" Width="1" HorizontalAlignment="Right"/>
         <Rectangle Grid.Row="1" Grid.Column="2" Stroke="LightGray" Height="1" VerticalAlignment="Top"></Rectangle>
 
-        <Button Grid.Row="1" Grid.Column="0" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="40,0,0,10" Padding="40,10" Width="132" Command="{Binding CloseWindow, Mode=OneWay}">Back</Button>
-        <Canvas Grid.Column="1" HorizontalAlignment="Left" Height="596" Grid.Row="1" VerticalAlignment="Top" Width="805" Name="canvas">
-            <ItemsControl ItemsSource="{Binding StatisticBars}">
+        <Button Grid.Row="1" Grid.Column="0" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="40,0,0,10" Padding="40,10" Width="132" Command="{Binding CreateTestData, Mode=OneWay}">Test</Button>
+        <Canvas Grid.Column="1" HorizontalAlignment="Left"  Grid.Row="1" VerticalAlignment="Top" Name="canvas" Margin="0,0,0,0">
+            <ItemsControl ItemsSource="{Binding StatBars}">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
                         <Canvas></Canvas>
@@ -51,14 +52,15 @@
                         <StackPanel>
                             <Rectangle Width="{Binding Width}" Height="{Binding Height}" Fill="{Binding Color}">
                                 <Rectangle.ToolTip>
-                                    <TextBlock Text="Tooltip"></TextBlock>
+                                    <TextBlock Text="{Binding ToolTip}"></TextBlock>
                                 </Rectangle.ToolTip>
                             </Rectangle>
-                            <TextBlock Text="{Binding Theme}" Width="{Binding Width}"  FontSize="22" FontWeight="Bold" VerticalAlignment="Center"></TextBlock>
+                            <TextBlock Text="{Binding Theme}" Width="{Binding Width}" FontWeight="Bold" VerticalAlignment="Center"></TextBlock>
                         </StackPanel>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
         </Canvas>
+
     </Grid>
 </Window>

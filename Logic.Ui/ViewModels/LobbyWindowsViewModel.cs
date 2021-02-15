@@ -77,7 +77,7 @@ namespace De.HsFlensburg.ClientApp049.Logic.Ui.ViewModels
                 ManagerObject.Themes.Clear();
             }
             ThemeViewModel themeVM;
-            String[] theme = { "Mathe", "Deutsch", "Englisch" };
+            String[] theme = { "Mathe", "Deutsch", "Englisch", "AWP", "Algo.", "DSV" };
             for (int i = 0; i < theme.Length; i++)
             {
                 themeVM = new ThemeViewModel();

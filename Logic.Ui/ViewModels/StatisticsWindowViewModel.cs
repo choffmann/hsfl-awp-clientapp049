@@ -1,15 +1,11 @@
-﻿using BinarySerializer;
-using De.HsFlensburg.ClientApp049.Logic.Ui.MessageBusMessages;
+﻿using De.HsFlensburg.ClientApp049.Logic.Ui.MessageBusMessages;
 using De.HsFlensburg.ClientApp049.Logic.Ui.ViewModels.Chart;
 using De.HsFlensburg.ClientApp049.Logic.Ui.Wrapper;
 using De.HsFlensburg.ClientApp049.Services.MessageBus;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace De.HsFlensburg.ClientApp049.Logic.Ui.ViewModels
 {
@@ -29,6 +25,20 @@ namespace De.HsFlensburg.ClientApp049.Logic.Ui.ViewModels
             }
         }
 
+        public CardViewModel cvm;
+        public CardViewModel CardVM
+        {
+            get
+            {
+                return cvm;
+            }
+            set
+            {
+                cvm = value;
+                OnPropertyChanged("CardVM");
+            }
+        }
+
         public String selectedItem;
         public String SelectedItem
         {
@@ -44,129 +54,178 @@ namespace De.HsFlensburg.ClientApp049.Logic.Ui.ViewModels
             }
         }
 
-        public StatisticBars myBars {get; set;}
-        public StatisticsBarCollection StatisticBars { 
-            get
-            {
-                return myBars.BarCollection;
-            }
-            private set
-            {
-            }
-            
-        }
-        public int totalCards;
-        public int TotalCards
+        public StatisticBars myBars;
+        public StatisticBars StatisticBars
         {
             get
             {
-                return totalCards;
+                return myBars;
             }
             set
             {
-                totalCards = value;
-                OnPropertyChanged("TotalCards");
+                myBars = value;
+                OnPropertyChanged("StatisticBars");
             }
         }
 
-        public RelayCommand CloseWindow { get; }
+        public StatisticsBarCollection StatBars
+        {
+            get
+            {
+                return StatisticBars.BarCollection;
+            }
+        }
+
+        private String total;
+        private String totalSuccess;
+        private String totalFailed;
+        public String Total
+        {
+            get
+            {
+                return total;
+            }
+            set
+            {
+                total = value;
+                OnPropertyChanged("Total");
+            }
+        }
+        public String TotalSuccess
+        {
+            get
+            {
+                return totalSuccess;
+            }
+            set
+            {
+                totalSuccess = value;
+                OnPropertyChanged("TotalSuccess");
+            }
+        }
+        public String TotalFailed
+        {
+            get
+            {
+                return totalFailed;
+            }
+            set
+            {
+                totalFailed = value;
+                OnPropertyChanged("TotalFailed");
+            }
+        }
+
+        public RelayCommand CreateTestData { get; }
+        public RelayCommand MouseDown { get; }
 
         public StatisticsWindowViewModel(ManagerViewModel model)
         {
             ManagerObject = model;
-            CloseWindow = new RelayCommand(() => CloseWindowMethode());
+            CardVM = new CardViewModel();
+            CreateTestData = new RelayCommand(() => CreateTestDataMethode());
+            //DrawStatisticBar();
             DrawStatisticBar();
-            showStatsNumber();
-            CreateTestData();
-        }
-
-        private void CloseWindowMethode()
-        {
-            ServiceBus.Instance.Send(new CloseStatisticsWindowMessage());
         }
 
         private void DrawStatisticBar()
         {
-            int themeTotal = 4;
-            int theme1Total = 4;
-            int theme2Total = 3;
-            int theme3Total = 5;
-            int theme4Total = 1;
-
-            int max = 100;
-
             List<double> valueList = new List<double>();
-
-            for (int i = 0; i < themeTotal; i++)
+            List<String> themeList = new List<String>();
+            List<String> toolTipList = new List<String>();
+            var v = ManagerObject.LearningCards.GetEnumerator();
+            v.MoveNext();
+            if(v.Current == null)
             {
-                valueList.Add(50);
+                CreateTestDataMethode();
             }
-            myBars = new StatisticBars(valueList, "Mathe", 4);
+            var Themes = ManagerObject.Themes.GetEnumerator();
+            Themes.MoveNext();
+            int total = 0;
+            int totalSuc = 0;
+            int totalFail = 0;
+            while (Themes.Current != null)
+            {
+                int countCards = 0;
+                int countAttempts = 0;
+                int success = 0;
+                int failed = 0;
+                IEnumerable<CardViewModel> Cards = ManagerObject.LearningCards.Where(c => c.Theme == Themes.Current.Name);
+                foreach (var Card in Cards)
+                {
+                    countCards++;
+                    total = total + Card.CardAttempts.Count;
+                    countAttempts = countAttempts + Card.CardAttempts.Count;
+                    IEnumerable<AttemptViewModel> AttemptsSuccess = Card.CardAttempts.Where(a => a.Success == true);
+                    IEnumerable<AttemptViewModel> AttemptsFailed = Card.CardAttempts.Where(a => a.Success == false);
+
+                    foreach(var suc in AttemptsSuccess)
+                    {
+                        success++;
+                        totalSuc++;
+                    }
+                    foreach(var fail in AttemptsFailed)
+                    {
+                        failed++;
+                        totalFail++;
+                    }
+                }
+                Console.WriteLine("Thema: " + Themes.Current.Name + " hat " + countCards + " Karten mit " + countAttempts + " Versuchen");
+                themeList.Add(Themes.Current.Name);
+                if(countAttempts < 30)
+                {
+                    valueList.Add(countAttempts * 5);
+                } else
+                {
+                    valueList.Add(countAttempts * 2);
+                }
+
+                toolTipList.Add("Gesamt: " + countAttempts + "\nErfolgreich: " + success + "\nErfolglos: " + failed);
+                Themes.MoveNext();
+            }
+
+            StatisticBars = new StatisticBars(valueList, themeList, toolTipList);
+            Total = "" + total;
+            TotalSuccess = "" + totalSuc;
+            TotalFailed = "" + totalFail;
+            StatisticBars = new StatisticBars(valueList, themeList, toolTipList);
         }
 
-        private void showStatsNumber()
+        private void CheckTopLimit(double value)
         {
-            TotalCards = ManagerObject.LearningCards.Count;
+
         }
 
-        private void CreateTestData()
+        private void CreateTestDataMethode()
         {
-            /*CardViewModel cvm = new CardViewModel();
-            AttemptViewModel attempt = new AttemptViewModel();
-            AttemptCollectionViewModel attemptCollection = new AttemptCollectionViewModel();
-            attempt.AttemptDate = DateTime.Today;
-            attempt.Success = false;
-            attemptCollection.CardAttempts.Add(attempt);
-            cvm.Question = "1+1";
-            cvm.Answer = "2";
-            cvm.Box = 3;
-            ManagerObject.LearningCards.Add(cvm);*/
+            String[] theme = { "Mathe", "Deutsch", "Englisch", "AWP", "Algo.", "DSV" };
+            Random rand = new Random();
+            int n = rand.Next(10) + 1 * 10;
+            for (int i = 0; i < n; i++)
+            {
+                CardViewModel cvm = new CardViewModel();
+                cvm.Theme = theme[rand.Next(6)];
+                cvm.Box = rand.Next(5);
+                int c = rand.Next(10) + 1;
+                for (int j = 0; j < c; j++)
+                {
+                    AttemptViewModel attempt = new AttemptViewModel();
+                    attempt.AttemptDate = DateTime.Today;
+                    if (rand.Next(10) % 2 == 0)
+                    {
+                        attempt.Success = false;
+                    }
+                    else
+                    {
+                        attempt.Success = true;
+                    }
 
-            CardViewModel cvm = new CardViewModel();
-            AttemptViewModel attempt = new AttemptViewModel();
-            attempt.AttemptDate = DateTime.Today;
-            attempt.Success = false;
-
-            cvm.CardAttempts.Add(attempt);
-
-            Console.WriteLine(cvm.CardAttempts.Count);
-
-            AttemptViewModel attempt2 = new AttemptViewModel();
-
-            attempt2.AttemptDate = DateTime.Today;
-            attempt2.Success = true;
-
-            cvm.CardAttempts.Add(attempt2);
-
-            Console.WriteLine(cvm.CardAttempts.Count);
-
-            ManagerObject.LearningCards.Add(cvm);
-
-            /*CardViewModel cvm1 = new CardViewModel();
-            AttemptViewModel attempt1 = new AttemptViewModel();
-            attempt1.AttemptDate = DateTime.Today;
-            attempt1.Success = true;
-            cvm1.CardAttempts.Add(attempt);
-            cvm1.CardAttempts.Add(attempt1);
-            cvm1.Question = "1+2";
-            cvm1.Answer = "3";
-            cvm1.Box = 3;
-            ManagerObject.LearningCards.Add(cvm1);
-
-            CardViewModel cvm2 = new CardViewModel();
-            AttemptViewModel attempt2 = new AttemptViewModel();
-            AttemptViewModel attempt3 = new AttemptViewModel();
-            attempt2.AttemptDate = DateTime.Today;
-            attempt2.Success = false;
-            attempt3.AttemptDate = DateTime.Today;
-            attempt3.Success = true;
-            cvm2.CardAttempts.Add(attempt);
-            cvm2.CardAttempts.Add(attempt2);
-            cvm2.CardAttempts.Add(attempt3);
-            cvm2.Question = "1+2";
-            cvm2.Answer = "3";
-            cvm2.Box = 3;
-            ManagerObject.LearningCards.Add(cvm2);*/
+                    cvm.CardAttempts.Add(attempt);
+                }
+                CardVM = cvm;
+                ManagerObject.LearningCards.Add(cvm);
+            }
+            DrawStatisticBar();
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
