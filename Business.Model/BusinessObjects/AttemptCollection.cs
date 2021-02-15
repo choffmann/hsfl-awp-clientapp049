@@ -8,12 +8,7 @@ using System.Threading.Tasks;
 namespace De.HsFlensburg.ClientApp049.Business.Model.BusinessObjects
 {
     [Serializable]
-    public class LearningCard
+    public class AttemptCollection: ObservableCollection<Attempt>
     {
-        public AttemptCollection CardAttempts { get; set; }
-        public String Question { get; set; }
-        public String Answer { get; set; }
-        public int Box { get; set; }
-        public String Theme {get; set;}
     }
 }

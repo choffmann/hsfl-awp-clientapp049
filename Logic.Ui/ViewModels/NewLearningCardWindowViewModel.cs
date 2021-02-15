@@ -1,6 +1,8 @@
 ﻿using BinarySerializer;
 using De.HsFlensburg.ClientApp049.Business.Model.BusinessObjects;
+using De.HsFlensburg.ClientApp049.Logic.Ui.MessageBusMessages;
 using De.HsFlensburg.ClientApp049.Logic.Ui.Wrapper;
+using De.HsFlensburg.ClientApp049.Services.MessageBus;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -68,15 +70,20 @@ namespace De.HsFlensburg.ClientApp049.Logic.Ui.ViewModels
         public ThemeCollectionViewModel ThemeCollectionVM { get; set; }
         public RelayCommand AddLearningCard { get; }
         public RelayCommand SerializeToBin { get; }
-        public RelayCommand DeserializeFromBin { get; }
+        public RelayCommand CloseWindow { get; }
 
         public event PropertyChangedEventHandler PropertyChanged;
         public NewLearningCardWindowViewModel(ManagerViewModel model)
         {
             ManagerObject = model;
             AddLearningCard = new RelayCommand(() => AddLearningCardMethode());
-            DeserializeFromBin = new RelayCommand(() => DeserializeFromBinMethode());
+            CloseWindow = new RelayCommand(() => CloseWindowMethode());
             //DeserializeFromBinMethode();
+        }
+
+        private void CloseWindowMethode()
+        {
+            ServiceBus.Instance.Send(new CloseNewLearningCardWindowMessage());
         }
 
         private void SerializeToBinMethode()

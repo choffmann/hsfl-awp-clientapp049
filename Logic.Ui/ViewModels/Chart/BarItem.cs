@@ -8,13 +8,14 @@ namespace De.HsFlensburg.ClientApp049.Logic.Ui.ViewModels.Chart
 {
     public class BarItem
     {
-        public BarItem(double x, double y, double width, double height, String color)
+        public BarItem(double x, double y, double width, double height, String color, String theme)
         {
             this.X = x;
             this.Y = y;
             this.Width = width;
             this.Height = height;
             this.Color = color;
+            this.Theme = theme;
         }
 
         public double X { get; set; }
@@ -22,5 +23,6 @@ namespace De.HsFlensburg.ClientApp049.Logic.Ui.ViewModels.Chart
         public double Width { get; set; }
         public double Height { get; set; }
         public String Color { get; set; }
+        public String Theme { get; set; }
     }
 }

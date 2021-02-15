@@ -41,6 +41,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="MessageBusMessages\CloseNewLearningCardWindowMessage.cs" />
+    <Compile Include="MessageBusMessages\CloseStatisticsWindowMessage.cs" />
     <Compile Include="MessageBusMessages\OpenLearningWindowMessage.cs" />
     <Compile Include="MessageBusMessages\OpenNewLearningCardWindowMessage.cs" />
     <Compile Include="MessageBusMessages\OpenSaveWindowMessage.cs" />
@@ -58,6 +60,7 @@
     <Compile Include="Wrapper\AbstractViewModels\IViewModel.cs" />
     <Compile Include="Wrapper\AbstractViewModels\ViewModelBase.cs" />
     <Compile Include="Wrapper\AbstractViewModels\ViewModelSyncCollections.cs" />
+    <Compile Include="Wrapper\AttemptCollectionViewModel.cs" />
     <Compile Include="Wrapper\AttemptViewModel.cs" />
     <Compile Include="Wrapper\CardCollectionViewModel.cs" />
     <Compile Include="Wrapper\CardViewModel.cs" />

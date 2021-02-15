@@ -11,22 +11,26 @@ namespace De.HsFlensburg.ClientApp049.Logic.Ui.Wrapper
 {
     public class CardViewModel: ViewModelBase<LearningCard>
     {
-
+        private AttemptCollectionViewModel attemptViewModel;
         public CardViewModel(): base()
         {
+            CardAttempts = new AttemptCollectionViewModel();
+            this.Model.CardAttempts = CardAttempts.Model;
         }
 
-        public ObservableCollection<Attempt> CardAttempts
+        public AttemptCollectionViewModel CardAttempts
         {
             get
             {
-                return Model.CardAttempts;
+                return attemptViewModel;
             }
             set
             {
-                Model.CardAttempts = value;
+                attemptViewModel = value;
+                OnPropertyChanged("CardAttempts");
             }
         }
+        
 
         public String Question
         {
@@ -79,7 +83,10 @@ namespace De.HsFlensburg.ClientApp049.Logic.Ui.Wrapper
 
         public override void NewModelAssigned()
         {
-            
+            if(this.CardAttempts != null)
+            {
+                this.CardAttempts.Model = this.Model?.CardAttempts;
+            }
         }
     }
 }

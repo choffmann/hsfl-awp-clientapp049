@@ -19,21 +19,20 @@
             <RowDefinition Height="596*"></RowDefinition>
         </Grid.RowDefinitions>
 
-        <!--Date-->
-        <TextBlock Grid.Row="0" Grid.Column="1" Text="10.01.2021" TextAlignment="Center" FontSize="32" FontWeight="Bold" HorizontalAlignment="Center" Margin="0,5,0,0"></TextBlock>
+        <TextBlock Grid.Row="0" Grid.Column="1" Text="Statistik" TextAlignment="Center" FontSize="32" FontWeight="Bold" HorizontalAlignment="Center" Margin="0,5,0,0"></TextBlock>
         <!--Topic Stats-->
         <TextBlock Grid.Row="0" Grid.Column="1" Text="Gesamt" FontSize="22" FontWeight="Bold" VerticalAlignment="Center" Margin="30,0,0,0"></TextBlock>
         <TextBlock Grid.Row="0" Grid.Column="1" Text="Erfolgreich" FontSize="22" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
         <TextBlock Grid.Row="0" Grid.Column="1" Text="Erfolglos" FontSize="22" FontWeight="Bold" VerticalAlignment="Center" Margin="0,0,30,0" TextAlignment="Right"></TextBlock>
         <!--Stats value-->
-        <TextBlock Grid.Row="0" Grid.Column="1" Text="25" FontSize="22" FontWeight="Bold" VerticalAlignment="Center" Margin="50,45,0,0"></TextBlock>
+        <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding Path=TotalCards}" FontSize="22" FontWeight="Bold" VerticalAlignment="Center" Margin="50,45,0,0"></TextBlock>
         <TextBlock Grid.Row="0" Grid.Column="1" Text="15" FontSize="22" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,45,0,0"></TextBlock>
         <TextBlock Grid.Row="0" Grid.Column="1" Text="10" FontSize="22" FontWeight="Bold" VerticalAlignment="Center"  Margin="0,45,60,0" TextAlignment="Right"></TextBlock>
 
         <Rectangle Grid.Column="0" Stroke="LightGray" Grid.RowSpan="2" Width="1" HorizontalAlignment="Right"/>
         <Rectangle Grid.Row="1" Grid.Column="2" Stroke="LightGray" Height="1" VerticalAlignment="Top"></Rectangle>
 
-        <Button Grid.Row="1" Grid.Column="0" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="20,0,0,10" Padding="40,10" Width="133">Back</Button>
+        <Button Grid.Row="1" Grid.Column="0" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="40,0,0,10" Padding="40,10" Width="132" Command="{Binding CloseWindow, Mode=OneWay}">Back</Button>
         <Canvas Grid.Column="1" HorizontalAlignment="Left" Height="596" Grid.Row="1" VerticalAlignment="Top" Width="805" Name="canvas">
             <ItemsControl ItemsSource="{Binding StatisticBars}">
                 <ItemsControl.ItemsPanel>
@@ -49,15 +48,17 @@
                 </ItemsControl.ItemContainerStyle>
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
-                        <Rectangle Width="{Binding Width}" Height="{Binding Height}" Fill="{Binding Color}"></Rectangle>
+                        <StackPanel>
+                            <Rectangle Width="{Binding Width}" Height="{Binding Height}" Fill="{Binding Color}">
+                                <Rectangle.ToolTip>
+                                    <TextBlock Text="Tooltip"></TextBlock>
+                                </Rectangle.ToolTip>
+                            </Rectangle>
+                            <TextBlock Text="{Binding Theme}" Width="{Binding Width}"  FontSize="22" FontWeight="Bold" VerticalAlignment="Center"></TextBlock>
+                        </StackPanel>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
         </Canvas>
-        <ListBox x:Name="listBox" HorizontalAlignment="Left" Grid.Row="1" VerticalAlignment="Top" Height="70" Margin="10,10,0,0" Width="191" ItemsSource="{Binding Path=ManagerObject.LearningCards}" SelectedItem="{Binding SelectedItem}">
-            <!--<ListBoxItem>Heute</ListBoxItem>
-            <ListBoxItem>Letzte 7 Tage</ListBoxItem>
-            <ListBoxItem>Letzte 30 Tage</ListBoxItem>-->
-        </ListBox>
     </Grid>
 </Window>
